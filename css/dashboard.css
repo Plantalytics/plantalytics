@@ -1,0 +1,133 @@
+/* 
+ * Plantalytics
+ *     Copyright (c) 2016 Sapphire Becker, Katy Brimm, Scott Ewing, 
+ *       Matt Fraser, Kelly Ledford, Michael Limb, Steven Ngo, Eric Turley.
+ *     This project is licensed under the MIT License.
+ *     Please see the file LICENSE in this distribution for license terms.
+ * Contact: plantalytics.capstone@gmail.com
+ */
+ 
+:root {
+    --page-margin: 10px;
+    --button-size: 40px;
+}
+
+html, body, .map {
+    width: 100%;
+    height: 100%;
+    margin: 0px;
+
+    overflow: hidden;
+}
+
+.map {
+    position: absolute;
+}
+
+.map-overlay {
+    display: none;
+}
+
+/* Button styles */
+.data-buttons {
+    display: inline-block;
+}
+
+.data-button-label > input {
+    visibility: hidden;
+    position: absolute;
+}
+
+.data-button-label > input:checked + .data-button {
+    background-color: lightgray;
+}
+
+.data-button, .menu-button {
+    width: var(--button-size);
+    height: var(--button-size);
+    border-radius: calc(var(--button-size) / 2);
+
+    border: 2px solid black;
+    margin: 5px;
+
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: white;
+
+    cursor: pointer;
+}
+
+.data-button {
+    display: block;
+}
+
+.leaf-wetness > div {
+    background-image: url(../images/leaf-wetness.png);
+}
+
+.temperature > div {
+    background-image: url(../images/temperature.png);
+}
+
+.humidity > div {
+    background-image: url(../images/humidity.png);
+}
+
+/* Menu styles */
+#menu {
+    margin-right: var(--page-margin);
+    margin-bottom: var(--page-margin);
+    display: inline-block;
+
+    background-image: url(../images/menu.png);
+}
+
+.menu {
+    position: absolute;
+    right: calc(var(--page-margin) + var(--button-size) / 2);
+    bottom: calc(var(--page-margin) + var(--button-size) / 2);
+
+    border: 2px solid black;
+    border-bottom-right-radius: 25px;
+    border-corner-shape: bevel;
+    background-color: white;
+    overflow: hidden;
+
+    font-size: 14pt;
+    font-weight: bold;
+
+    cursor: default;
+
+    display: none;
+}
+
+.data-view-defaults {
+    display: inline-flex;
+}
+
+.menu .data-button-label div {
+    width: 30px;
+    height: 30px;
+
+    display: inline-block;
+}
+
+.menu-group {
+    border-bottom: 1px solid black;
+}
+
+.menu-group:last-child {
+    border-bottom: 0px solid transparent;
+}
+
+.menu-entry, menu-entry-unselectable {
+    padding: 0px 5px;
+}
+
+.menu-entry:hover {
+    background-color: lightgray;
+}
+
+.centered {
+    text-align: center;
+}
