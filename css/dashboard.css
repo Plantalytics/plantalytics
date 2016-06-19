@@ -121,12 +121,16 @@ html, body, .map {
     margin-right: 0px;
 }
 
-.menu-group {
+.menu-group, .menu-spacer {
     border-bottom: 1px solid black;
 }
 
 .menu-group:last-child {
     border-bottom: 0px solid transparent;
+}
+
+.menu-spacer {
+    height: 50px;
 }
 
 .menu-entry, .menu-entry-unselectable {
