@@ -7,10 +7,10 @@
  * Contact: plantalytics.capstone@gmail.com
  */
  
-:root {
+/* :root {
     --page-margin: 10px;
     --button-size: 40px;
-}
+} */
 
 html, body, .map {
     width: 100%;
@@ -43,9 +43,9 @@ html, body, .map {
 }
 
 .data-button, .menu-button {
-    width: var(--button-size);
-    height: var(--button-size);
-    border-radius: calc(var(--button-size) / 2);
+    width: 40px; /* var(--button-size); */
+    height: 40px; /* var(--button-size); */
+    border-radius: 20px; /* calc(var(--button-size) / 2); */
 
     border: 2px solid black;
     margin: 5px;
@@ -76,8 +76,8 @@ html, body, .map {
 
 /* Menu styles */
 #menu {
-    margin-right: var(--page-margin);
-    margin-bottom: var(--page-margin);
+    margin-right: 10px; /* var(--page-margin) */
+    margin-bottom: 10px; /* var(--page-margin) */
     display: inline-block;
 
     background-image: url(../images/menu.png);
@@ -85,8 +85,8 @@ html, body, .map {
 
 .menu {
     position: absolute;
-    right: calc(var(--page-margin) + var(--button-size) / 2);
-    bottom: calc(var(--page-margin) + var(--button-size) / 2);
+    right: 30px; /* calc(var(--page-margin) + var(--button-size) / 2); */
+    bottom: 30px; /* calc(var(--page-margin) + var(--button-size) / 2); */
 
     border: 2px solid black;
     border-bottom-right-radius: 25px;
