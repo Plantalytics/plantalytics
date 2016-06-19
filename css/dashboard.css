@@ -39,7 +39,7 @@ html, body, .map {
 }
 
 .data-button-label > input:checked + .data-button {
-    background-color: lightgray;
+    background-color: #C2ADB5;
 }
 
 .data-button, .menu-button {
