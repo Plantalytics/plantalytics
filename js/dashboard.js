@@ -47,10 +47,12 @@ function createMap(data) {
 
     google.maps.event.addListenerOnce(map, "tilesloaded", function() {
         // Select default heatmap.
-        var defaultDataView = localStorage.defaultDataView;
-        if (defaultDataView) {
-            $(".data-buttons " + defaultDataView).click();
-            $(".data-view-defaults " + defaultDataView + " input").prop("checked", true);
+        if (localStorage) {
+            var defaultDataView = localStorage.defaultDataView;
+            if (defaultDataView) {
+                $(".data-buttons " + defaultDataView).click();
+                $(".data-view-defaults " + defaultDataView + " input").prop("checked", true);
+            }
         }
 
         // Get and store target width and height of menu.
@@ -59,7 +61,7 @@ function createMap(data) {
         $menu.data({
             "width": $menu.width(),
             "height": $menu.height(),
-        })
+        });
         $menu.hide();
     });
 }
