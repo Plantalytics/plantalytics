@@ -53,6 +53,7 @@ html, body, .map {
     background-repeat: no-repeat;
     background-position: center;
     background-color: white;
+    background-size: 85%;
 
     cursor: pointer;
 }
@@ -112,6 +113,14 @@ html, body, .map {
     display: inline-block;
 }
 
+.menu .data-button-label:first-child div {
+    margin-left: 0px;
+}
+
+.menu .data-button-label:last-child div {
+    margin-right: 0px;
+}
+
 .menu-group {
     border-bottom: 1px solid black;
 }
@@ -120,7 +129,7 @@ html, body, .map {
     border-bottom: 0px solid transparent;
 }
 
-.menu-entry, menu-entry-unselectable {
+.menu-entry, .menu-entry-unselectable {
     padding: 0px 5px;
 }
 
