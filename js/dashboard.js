@@ -54,15 +54,6 @@ function createMap(data) {
                 $(".data-view-defaults " + defaultDataView + " input").prop("checked", true);
             }
         }
-
-        // Get and store target width and height of menu.
-        var $menu = $(".menu");
-        $menu.show();
-        $menu.data({
-            "width": $menu.width(),
-            "height": $menu.height(),
-        });
-        $menu.hide();
     });
 }
 
@@ -84,33 +75,39 @@ $(window).resize(function() {
 //////////////////////////////// Controls code ////////////////////////////////
 $(function() {
     $("#menu").click(function() {
-        var $menu = $(".menu");
-        if ($menu.is(":visible")) {
+        var $menu = $(".menu")
+        var visible = $menu.is(":visible");
+        $menu.show()
+        var width = $menu.width();
+        var height = $menu.height();
+        if (visible) {
             // Animate hiding menu.
             $menu.animate({
                 "height": 10,
             }, {
-                "duration": 300,
+                "duration": 150,
             }).animate({
                 "width": 0,
             }, {
-                "duration": 500,
+                "duration": 300,
                 "queue": true,
                 "complete": function() {
+                    $menu.width(width);
+                    $menu.height(height);
                     $menu.hide();
                 }
             });
         } else {
             // Animate showing menu.
-            $menu.show().width(0).height(10);
+            $menu.width(0).height(10);
             $menu.animate({
-                "width": $menu.data("width"),
+                "width": width,
+            }, {
+                "duration": 150,
+            }).animate({
+                "height": height,
             }, {
                 "duration": 300,
-            }).animate({
-                "height": $menu.data("height"),
-            }, {
-                "duration": 500,
                 "queue": true,
             });
         }
