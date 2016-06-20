@@ -85,8 +85,8 @@ html, body, .map {
 
 .menu {
     position: absolute;
-    right: 30px; /* calc(var(--page-margin) + var(--button-size) / 2); */
-    bottom: 30px; /* calc(var(--page-margin) + var(--button-size) / 2); */
+    right: 40px; /* calc(var(--page-margin) + var(--button-size) * 2/3); */
+    bottom: 40px; /* calc(var(--page-margin) + var(--button-size) * 2/3); */
 
     border: 2px solid black;
     border-bottom-right-radius: 25px;
