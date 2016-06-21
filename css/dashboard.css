@@ -129,10 +129,6 @@ html, body, .map {
     border-bottom: 0px solid transparent;
 }
 
-.menu-spacer {
-    height: 50px;
-}
-
 .menu-entry, .menu-entry-unselectable {
     padding: 0px 5px;
 }
