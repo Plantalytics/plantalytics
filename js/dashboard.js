@@ -1,6 +1,6 @@
-/* 
+/*
  * Plantalytics
- *     Copyright (c) 2016 Sapphire Becker, Katy Brimm, Scott Ewing, 
+ *     Copyright (c) 2016 Sapphire Becker, Katy Brimm, Scott Ewing,
  *       Matt Fraser, Kelly Ledford, Michael Limb, Steven Ngo, Eric Turley.
  *     This project is licensed under the MIT License.
  *     Please see the file LICENSE in this distribution for license terms.
@@ -54,15 +54,6 @@ function createMap(data) {
                 $(".data-view-defaults " + defaultDataView + " input").prop("checked", true);
             }
         }
-
-        // Get and store target width and height of menu.
-        var $menu = $(".menu");
-        $menu.show();
-        $menu.data({
-            "width": $menu.width(),
-            "height": $menu.height(),
-        });
-        $menu.hide();
     });
 }
 
@@ -84,35 +75,44 @@ $(window).resize(function() {
 //////////////////////////////// Controls code ////////////////////////////////
 $(function() {
     $("#menu").click(function() {
-        var $menu = $(".menu");
-        if ($menu.is(":visible")) {
-            // Animate hiding menu.
-            $menu.animate({
-                "height": 10,
-            }, {
-                "duration": 300,
-            }).animate({
-                "width": 0,
-            }, {
-                "duration": 500,
-                "queue": true,
-                "complete": function() {
-                    $menu.hide();
-                }
-            });
-        } else {
-            // Animate showing menu.
-            $menu.show().width(0).height(10);
-            $menu.animate({
-                "width": $menu.data("width"),
-            }, {
-                "duration": 300,
-            }).animate({
-                "height": $menu.data("height"),
-            }, {
-                "duration": 500,
-                "queue": true,
-            });
+        var $menu = $(".menu")
+        var visible = $menu.is(":visible");
+        $menu.show()
+        var width = $menu.width();
+        var height = $menu.height();
+        if (!$menu.is(':animated')) {
+            if (visible) {
+                // Animate hiding menu.
+                $menu.animate({
+                    "height": 10,
+                }, {
+                    "duration": 150,
+                }).animate({
+                    "width": 0,
+                }, {
+                    "duration": 300,
+                    "queue": true,
+                    "complete": function() {
+                        $menu.width(width);
+                        $menu.height(height);
+                        $menu.hide();
+                        isAnimating = false;
+                    }
+                });
+            } else {
+                // Animate showing menu.
+                $menu.width(0).height(10);
+                $menu.animate({
+                    "width": width,
+                }, {
+                    "duration": 150,
+                }).animate({
+                    "height": height,
+                }, {
+                    "duration": 300,
+                    "queue": true
+                });
+            }
         }
     });
 
