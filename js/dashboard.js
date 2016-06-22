@@ -74,17 +74,15 @@ $(window).resize(function() {
 
 //////////////////////////////// Controls code ////////////////////////////////
 $(function() {
-    var isAnimating = false;
     $("#menu").click(function() {
         var $menu = $(".menu")
         var visible = $menu.is(":visible");
         $menu.show()
         var width = $menu.width();
         var height = $menu.height();
-        if (!isAnimating) {
+        if (!$menu.is(':animated')) {
             if (visible) {
                 // Animate hiding menu.
-                isAnimating = true;
                 $menu.animate({
                     "height": 10,
                 }, {
@@ -103,7 +101,6 @@ $(function() {
                 });
             } else {
                 // Animate showing menu.
-                isAnimating = true;
                 $menu.width(0).height(10);
                 $menu.animate({
                     "width": width,
@@ -113,10 +110,7 @@ $(function() {
                     "height": height,
                 }, {
                     "duration": 300,
-                    "queue": true,
-                    "complete": function() {
-                        isAnimating = false;
-                    }
+                    "queue": true
                 });
             }
         }
