@@ -10,24 +10,39 @@
 <html>
     <head>
         <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>My Vineyard - Plantalytics</title>
-        
-        <!-- Includes -->
-        <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet"> 
-        <script src="http://code.jquery.com/jquery-2.0.0.js"></script>
-        <link rel="stylesheet" href="css/dashboard.css"/>
-        <script type="text/javascript" src="js/dashboard.js"></script>
-        <script src="https://maps.googleapis.com/maps/api/js?callback=readyMap" async defer></script>
-        
+
+        <!------------------------------ CDNs ------------------------------>
+
+        <!-- Fonts -->
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+        <!-- jQuery -->
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+
+        <!-- Leaflet -->
+        <link rel="stylesheet" href="//cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
+        <script src="//cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
+
         <!-- Favicon Links -->
         <link sizes="32x32" href="http://plantalytics.us/wp-content/uploads/2016/03/cropped-Leaves-32x32.png" rel="icon">
         <link sizes="192x192" href="http://plantalytics.us/wp-content/uploads/2016/03/cropped-Leaves-192x192.png" rel="icon">
         <link href="http://plantalytics.us/wp-content/uploads/2016/03/cropped-Leaves-180x180.png" rel="apple-touch-icon-precomposed">
         <meta content="http://plantalytics.us/wp-content/uploads/2016/03/cropped-Leaves-270x270.png" name="msapplication-TileImage">
+
+        <!--------------------------- Local Files --------------------------->
+
+        <!-- Leaflet IDW Plugin -->
+        <script src="js/leaflet-idw.js"></script>
+
+        <!-- Our Styles & Scripts -->
+        <link rel="stylesheet" href="css/dashboard.css"/>
+        <script type="text/javascript" src="js/dashboard.js"></script>
     </head>
     <body>
-        <div class="map"></div>
+        <div id="map"></div>
         <div class="map-overlay">
             <span class="data-buttons">
                 <label class="data-button-label leaf-wetness">
