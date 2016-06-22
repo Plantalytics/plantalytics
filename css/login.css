@@ -68,13 +68,13 @@ a:link {
 }
 
 a:active {
-    color: dimgrey;
+    color: dimgray;
     font-weight: 600;
     text-decoration: none;
 }
 
 a:hover {
-    color: dimgrey;
+    color: dimgray;
     font-weight: 600;
     text-decoration: none;
 }
