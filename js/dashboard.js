@@ -82,43 +82,43 @@ $(function() {
         var width = $menu.width();
         var height = $menu.height();
         if (!isAnimating) {
-          if (visible) {
-              // Animate hiding menu.
-              isAnimating = true;
-              $menu.animate({
-                  "height": 10,
-              }, {
-                  "duration": 150,
-              }).animate({
-                  "width": 0,
-              }, {
-                  "duration": 300,
-                  "queue": true,
-                  "complete": function() {
-                      $menu.width(width);
-                      $menu.height(height);
-                      $menu.hide();
-                      isAnimating = false;
-                  }
-              });
-          } else {
-              // Animate showing menu.
-              isAnimating = true;
-              $menu.width(0).height(10);
-              $menu.animate({
-                  "width": width,
-              }, {
-                  "duration": 150,
-              }).animate({
-                  "height": height,
-              }, {
-                  "duration": 300,
-                  "queue": true,
-                  "complete": function() {
-                      isAnimating = false;
-                  }
-              });
-          }
+            if (visible) {
+                // Animate hiding menu.
+                isAnimating = true;
+                $menu.animate({
+                    "height": 10,
+                }, {
+                    "duration": 150,
+                }).animate({
+                    "width": 0,
+                }, {
+                    "duration": 300,
+                    "queue": true,
+                    "complete": function() {
+                        $menu.width(width);
+                        $menu.height(height);
+                        $menu.hide();
+                        isAnimating = false;
+                    }
+                });
+            } else {
+                // Animate showing menu.
+                isAnimating = true;
+                $menu.width(0).height(10);
+                $menu.animate({
+                    "width": width,
+                }, {
+                    "duration": 150,
+                }).animate({
+                    "height": height,
+                }, {
+                    "duration": 300,
+                    "queue": true,
+                    "complete": function() {
+                        isAnimating = false;
+                    }
+                });
+            }
         }
     });
 
