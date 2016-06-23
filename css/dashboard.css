@@ -25,7 +25,15 @@ html, body, #map {
 }
 
 .map-overlay {
-    display: none;
+    position: absolute;
+    /*display: none;*/
+}
+
+.menu-control {
+    bottom: 0;
+    padding-bottom: 8px;
+    position: fixed;
+    right: 0;
 }
 
 /* Button styles */
