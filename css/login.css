@@ -44,8 +44,8 @@
 
 /* General page style */
 body {
-    background: beige;
-    color: dimgrey;
+    background: white;
+    color: black;
     font-family: "Open Sans", sans-serif;
     padding: 0px;
     margin: 0px;
@@ -56,7 +56,7 @@ br {
 }
 
 strong {
-    color: darkolivegreen;
+    color: black;
     font-size: 110%;
 }
 
@@ -68,13 +68,13 @@ a:link {
 }
 
 a:active {
-    color: dimgrey;
+    color: dimgray;
     font-weight: 600;
     text-decoration: none;
 }
 
 a:hover {
-    color: dimgrey;
+    color: dimgray;
     font-weight: 600;
     text-decoration: none;
 }
@@ -96,11 +96,12 @@ p.centerBlock {
 /* Input style */
 /* Applies to buttons and fields */
 input {
-    border: darkolivegreen solid 1px;
+    border: black solid 1px;
     border-radius: 6px;
     background: white;
     padding-left: .5em;
     padding-right: .5em;
+    font-size: 100%;
 }
 
 /* Button styles */
@@ -111,10 +112,9 @@ input.button {
     padding-left: 1em;
     padding-right: 1em;
     color: beige;
-    font-size: 100%;
 }
 
 input.button:active {
     border: darkolivegreen solid 2px;
-    background: dimgrey;
+    background: dimgray;
 }
