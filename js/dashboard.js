@@ -7,7 +7,7 @@
  * Contact: plantalytics.capstone@gmail.com
  */
 
-$.getScript('//www.mapquestapi.com/sdk/leaflet/v2.2/mq-map.js?key=LAoUtqeQeLyA07blkJFLWaoZT8qmcBwe', readyMap);
+$.getScript('http://www.mapquestapi.com/sdk/leaflet/v2.2/mq-map.js?key=LAoUtqeQeLyA07blkJFLWaoZT8qmcBwe', readyMap);
 
 /////////////////////////////////// On Load ///////////////////////////////////
 $(function() {
