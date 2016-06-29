@@ -2,7 +2,7 @@
 
 <!--
   Plantalytics
-    Copyright (c) 2016 Sapphire Becker, Katy Brimm, Scott Ewing, 
+    Copyright (c) 2016 Sapphire Becker, Katy Brimm, Scott Ewing,
       Matt Fraser, Kelly Ledford, Michael Limb, Steven Ngo, Eric Turley.
     This project is licensed under the MIT License.
     Please see the file LICENSE in this distribution for license terms.
@@ -14,13 +14,13 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>Plantalytics Login</title>
-        
+
         <!-- Includes -->
-        <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet"> 
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
         <script src="http://code.jquery.com/jquery-2.0.0.js"> </script>
         <link rel="stylesheet" href="css/login.css"/>
         <script type="text/javascript" src="js/login.js"> </script>
-        
+
         <!-- Favicon Links -->
         <link sizes="32x32" href="http://plantalytics.us/wp-content/uploads/2016/03/cropped-Leaves-32x32.png" rel="icon">
         <link sizes="192x192" href="http://plantalytics.us/wp-content/uploads/2016/03/cropped-Leaves-192x192.png" rel="icon">
@@ -35,13 +35,13 @@
             </p>
             <p class="centerBlock">
                 <label for="login">Username </label>
-                <input class="textBox" type="text" name="loginUsername" />
+                <input class="textBox" type="text" id="loginUsername" />
             </p>
             <p class="centerBlock">
                 <label for="password">Password </label>
                 <!-- Will connect with password reset page once implemented -->
                 <a href="#" tabindex="-1" title="Forgot your password?">?</a>
-                <input class="textBox" type="password" name="loginPassword" />
+                <input class="textBox" type="password" id="loginPassword" />
             </p>
             <p class="centerBlock">
                 <input id="loginButton" class="button" type="button" value="Login" />
