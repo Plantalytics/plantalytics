@@ -59,32 +59,32 @@ function createMap(data) {
     // Calculate map bounds
     var latOffset = .00145; // perhaps calculate these offsets based
     var lngOffset = .00525; // on the surface area of the vineyard
-    var southWest = {'lat': data.center.lat - latOffset, 'lng': data.center.lng - lngOffset};
-    var northEast = {'lat': data.center.lat + latOffset, 'lng': data.center.lng + lngOffset};
+     var southWest = {'lat': data.center.lat - latOffset, 'lng': data.center.lng - lngOffset};
+     var northEast = {'lat': data.center.lat + latOffset, 'lng': data.center.lng + lngOffset};
 
-    // Initialize map
-    mapsData = data;
-    map = L.map('map', {
+     // Initialize map
+     mapsData = data;
+     map = L.map('map', {
         center: data.center,
         doubleClickZoom: false,
         layers: MQ.satelliteLayer(),
         maxBounds: [southWest, northEast],
-        minZoom: 18,
-        // maxZoom: 19, // lose tiles at 20 and up
+        minZoom: 17,
+        maxZoom: 19, // lose tiles at 20 and up
         scrollWheelZoom: 'center',
         zoom: 18,
         zoomControl: false
         // We may want this as false in browser display.
         // disableDefaultUI: true // seems to be a google-only property
     });
-    var zoom = L.control.zoom({'position': 'topright'});
-    map.addControl(zoom);
+     var zoom = L.control.zoom({'position': 'topright'});
+     map.addControl(zoom);
 
-    // Add custom controls to the map. This is specifically for mobile view.
-    // map.controls[google.maps.ControlPosition.LEFT_TOP].push($(".data-buttons").detach()[0]);
-    // map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push($(".menu-control").detach()[0]);
+     // Add custom controls to the map. This is specifically for mobile view.
+     // map.controls[google.maps.ControlPosition.LEFT_TOP].push($(".data-buttons").detach()[0]);
+     // map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push($(".menu-control").detach()[0]);
 
-    /**
+     /**
      * Note: The following must be done after map creation
      */
 
