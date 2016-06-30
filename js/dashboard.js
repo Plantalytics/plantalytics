@@ -12,7 +12,7 @@ $.getScript('http://www.mapquestapi.com/sdk/leaflet/v2.2/mq-map.js?key=' + mapQu
 /////////////////////////////////// On Load ///////////////////////////////////
 $(function() {
     // Get information for our current user.
-    //TODO: $.ajax({...})
+    // TODO: $.ajax({...})
     ({
         "url": "",
         "dataType": "json",
@@ -24,10 +24,12 @@ $(function() {
             }
         },
     }).success({
+        // Vineyard center [lat, lon]
         "center": {
             "lat": 45.281041,
             "lng": -123.061896
         },
+        // Node locations & values [lat, lon, val], ...
         'nodeLoc': [
             [45.281679, -123.062533, 58],
             [45.281554, -123.061838, 17],
@@ -39,7 +41,7 @@ $(function() {
             [45.280680, -123.062076, 21],
             [45.280511, -123.061333, 66]
         ],
-        // Boundary coordinates for vineyard
+        // Boundary coords [lat, lon], ...
         // Must be listed in drawing order
         'propertyBoundary': [
             [45.282053, -123.062833],
@@ -57,46 +59,47 @@ $(function() {
 var map, mapsReady = false, mapsData = null;
 function createMap(data) {
     // Calculate map bounds
-    var latOffset = .00145; // perhaps calculate these offsets based
-    var lngOffset = .00525; // on the surface area of the vineyard
-     var southWest = {'lat': data.center.lat - latOffset, 'lng': data.center.lng - lngOffset};
-     var northEast = {'lat': data.center.lat + latOffset, 'lng': data.center.lng + lngOffset};
+    var latOffset = .00145; // Perhaps calculate these offsets based
+    var lngOffset = .00525; //   on the surface area of the vineyard.
+    var southWest = {'lat': data.center.lat - latOffset, 'lng': data.center.lng - lngOffset};
+    var northEast = {'lat': data.center.lat + latOffset, 'lng': data.center.lng + lngOffset};
 
-     // Initialize map
-     mapsData = data;
-     map = L.map('map', {
+    // Initialize map
+    mapsData = data;
+    map = L.map('map', {
         center: data.center,
         doubleClickZoom: false,
         layers: MQ.satelliteLayer(),
         maxBounds: [southWest, northEast],
         minZoom: 17,
-        maxZoom: 19, // lose tiles at 20 and up
+        maxZoom: 19, // Lose tiles at 20 and up
         scrollWheelZoom: 'center',
         zoom: 18,
         zoomControl: false
         // We may want this as false in browser display.
-        // disableDefaultUI: true // seems to be a google-only property
+        // Seems to be a google-only property.
+        // disableDefaultUI: true 
     });
-     var zoom = L.control.zoom({'position': 'topright'});
-     map.addControl(zoom);
+    var zoom = L.control.zoom({'position': 'topright'});
+    map.addControl(zoom);
 
-     // Add custom controls to the map. This is specifically for mobile view.
-     // map.controls[google.maps.ControlPosition.LEFT_TOP].push($(".data-buttons").detach()[0]);
-     // map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push($(".menu-control").detach()[0]);
+    // Add custom controls to the map. This is specifically for mobile view.
+    // map.controls[google.maps.ControlPosition.LEFT_TOP].push($(".data-buttons").detach()[0]);
+    // map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push($(".menu-control").detach()[0]);
 
-     /**
+    /*
      * Note: The following must be done after map creation
      */
 
     //////////////////////// Generate IDW Interpolation ////////////////////////
     var idw = L.idwLayer(data.nodeLoc , {
-        opacity: 0.4,  // interpolation layer opacity
+        opacity: 0.4,  // Interpolation layer opacity
         maxZoom: 20,
-        cellSize: 5,   // cellSize determines interpolation granularity
-        exp: 3,        // exponent used for weighting
-        /* Max varies based on condition/value */
-        max: 66,       // point value ceiling
-        gradient: {    // gradient assignment red (hi) -> violet (lo)
+        cellSize: 5,   // CellSize determines interpolation granularity
+        exp: 3,        // Exponent used for weighting
+        // Max varies based on condition/value
+        max: 66,       // Point value ceiling
+        gradient: {    // Gradient assignment red (hi) -> violet (lo)
             0.0: 'violet',
             0.1: 'blueviolet',
             0.2: 'blue',
