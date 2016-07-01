@@ -8,6 +8,24 @@
  */
 
 $(function() {
+    /*
+     * Listener for 'enter' keypress on #loginUsername field.
+     */
+    $('#loginUsername').on('keypress', function(evt) {
+        if (evt.which == 13 && !evt.shiftKey) {
+            $('#loginButton').trigger('click');
+        }
+    });
+
+    /*
+     * Listener for 'enter' keypress on #loginPassword field.
+     */
+    $('#loginPassword').on('keypress', function(evt) {
+        if (evt.which == 13 && !evt.shiftKey) {
+            $('#loginButton').trigger('click');
+        }
+    });
+
     $('#loginButton').click(function() {
         /* This function to handle user login
          * once backend support allows
