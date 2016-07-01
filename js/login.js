@@ -12,14 +12,15 @@ $(function() {
         /* This function to handle user login
          * once backend support allows
          */
-        //window.location.href = "dashboard.html";
-        //return false;
         $.ajax({
-            url: 'http://localhost:8000/login/?username=' + $('#loginUsername').val()
+            url: 'http://localhost:8000/login?username=' + $('#loginUsername').val()
                     + '&password=' + $('#loginPassword').val(),
             type: "GET"
         }).done(function(json) {
-            console.log(json);
+            console.log("Success!");
+            window.location.href = "dashboard.html";
+        }).error( function() {
+            console.error("An error occurred.");
         });
     });
 });
