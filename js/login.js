@@ -39,12 +39,12 @@ $(function() {
                 localStorage.accessToken = json.token;
                 window.location.href = "dashboard.html";
             } else {
-                // TODO: Show error message.
-                console.error("An error occurred.");
+                // Show error message.
+                $("#loginError").text("Error logging in.");
             }
         }).error( function() {
-            // TODO: Show error message
-            console.error("An error occurred.");
+            // Show error message
+            $("#loginError").text("Error logging in.");
         });
     });
 });
