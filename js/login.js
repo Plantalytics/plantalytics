@@ -35,9 +35,15 @@ $(function() {
                     + '&password=' + $('#loginPassword').val(),
             type: "GET"
         }).done(function(json) {
-            console.log("Success!");
-            window.location.href = "dashboard.html";
+            if (json.token) {
+                localStorage.accessToken = json.token;
+                window.location.href = "dashboard.html";
+            } else {
+                // TODO: Show error message.
+                console.error("An error occurred.");
+            }
         }).error( function() {
+            // TODO: Show error message
             console.error("An error occurred.");
         });
     });

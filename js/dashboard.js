@@ -13,6 +13,12 @@ $.getScript('http://www.mapquestapi.com/sdk/leaflet/v2.2/mq-map.js?key=' + mapQu
 $(function() {
     // Get information for our current user.
     // TODO: $.ajax({...})
+
+    // Make sure the user has a login token before continuing.
+    if (!localStorage.accessToken) {
+      window.location = "login.html";
+    }
+
     ({
         "url": "",
         "dataType": "json",
@@ -78,7 +84,7 @@ function createMap(data) {
         zoomControl: false
         // We may want this as false in browser display.
         // Seems to be a google-only property.
-        // disableDefaultUI: true 
+        // disableDefaultUI: true
     });
     var zoom = L.control.zoom({'position': 'topright'});
     map.addControl(zoom);
@@ -210,7 +216,10 @@ $(function() {
     });
 
     $("#menu-logout").click(function() {
-        // TODO: log user out.
+        // Delete access token from local storage.
+        delete localStorage.accessToken;
+
+        // Redirect to login page
         window.location = "login.html";
     });
 });
