@@ -1,6 +1,6 @@
-/* 
+/*
  * Plantalytics
- *     Copyright (c) 2016 Sapphire Becker, Katy Brimm, Scott Ewing, 
+ *     Copyright (c) 2016 Sapphire Becker, Katy Brimm, Scott Ewing,
  *       Matt Fraser, Kelly Ledford, Michael Limb, Steven Ngo, Eric Turley.
  *     This project is licensed under the MIT License.
  *     Please see the file LICENSE in this distribution for license terms.
@@ -14,7 +14,7 @@
         width: 75%;
         margin: auto;
     }
-    
+
     #logo {
         position: relative;
         top: 0px;
@@ -31,7 +31,7 @@
     div.container {
         width: 100%;
     }
-    
+
     #logo {
         position: relative;
         top: 0px;
@@ -58,6 +58,10 @@ br {
 strong {
     color: black;
     font-size: 110%;
+}
+
+strong.error {
+    color: red;
 }
 
 /* Link style */
