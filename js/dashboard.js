@@ -82,20 +82,18 @@ function createMap(data) {
         scrollWheelZoom: 'center',
         zoom: 18,
         zoomControl: false
-        // We may want this as false in browser display.
-        // Seems to be a google-only property.
-        // disableDefaultUI: true
     });
     var zoom = L.control.zoom({'position': 'topright'});
     map.addControl(zoom);
 
-    // Add custom controls to the map. This is specifically for mobile view.
-    // map.controls[google.maps.ControlPosition.LEFT_TOP].push($(".data-buttons").detach()[0]);
-    // map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push($(".menu-control").detach()[0]);
-
-    /*
-     * Note: The following must be done after map creation
-     */
+    // Set default map view upon map creation
+    if (localStorage) {
+        var defaultDataView = localStorage.defaultDataView;
+        if (defaultDataView) {
+            $(".data-buttons " + defaultDataView).click();
+            $(".data-view-defaults " + defaultDataView + " input").prop("checked", true);
+        }
+    }
 
     //////////////////////// Generate IDW Interpolation ////////////////////////
     var idw = L.idwLayer(data.nodeLoc , {
@@ -124,20 +122,6 @@ function createMap(data) {
     var propertyBoundary = L.polygon(data.propertyBoundary, {
         fillOpacity: 0
     }).addTo(map);
-
-    // Set default map view upon map creation
-    // only works with L.tileLayer, eg, var tileLayer = L.tileLayer(...).addTo(map);
-    // tileLayer.once('load', function() {...});
-    // commenting out in the meantime
-    // map.once('load', function() {
-    //     if (localStorage) {
-    //         var defaultDataView = localStorage.defaultDataView;
-    //         if (defaultDataView) {
-    //             $(".data-buttons " + defaultDataView).click();
-    //             $(".data-view-defaults " + defaultDataView + " input").prop("checked", true);
-    //         }
-    //     }
-    // });
 }
 
 function readyMap() {
