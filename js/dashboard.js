@@ -216,6 +216,24 @@ $(function() {
             window.location.href = "dashboard.html";
         });
     });
+
+
+    $('#temperature-button').click(function() {
+				$.ajax({
+            url: 'http://localhost:8000/env_data?vineyard_id=0&env_variable=temperature',
+            type: "GET"
+        }).done(function(json) {
+            if (json.env_data) {
+                window.location.href = "http://localhost:8000/env_data?vineyard_id=0&env_variable=temperature";
+            } else {
+                // go nowhere
+                window.location.href = "dashboard.html";
+            }
+        }).error( function() {
+            // go nowhere
+            window.location.href = "dashboard.html";
+        });
+    });
 //----------------------
 
     $("#menu-logout").click(function() {
