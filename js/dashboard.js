@@ -200,8 +200,7 @@ $(function() {
     });
 
 //--------------------
-    $('.data-buttons').click(function() {
-				var title = $(this).attr('Leaf wetness');
+    $('#leafwetness-button').click(function() {
 				$.ajax({
             url: 'http://localhost:8000/env_data?vineyard_id=0&env_variable=leafwetness',
             type: "GET"
@@ -217,8 +216,6 @@ $(function() {
             window.location.href = "dashboard.html";
         });
     });
-
-
 //----------------------
 
     $("#menu-logout").click(function() {
