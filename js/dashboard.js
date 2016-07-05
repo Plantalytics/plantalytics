@@ -199,6 +199,28 @@ $(function() {
         }
     });
 
+//--------------------
+    $('.data-buttons').click(function() {
+				var title = $(this).attr('Leaf wetness');
+				$.ajax({
+            url: 'http://localhost:8000/env_data?vineyard_id=0&env_variable=leafwetness',
+            type: "GET"
+        }).done(function(json) {
+            if (json.env_data) {
+                window.location.href = "http://localhost:8000/env_data?vineyard_id=0&env_variable=leafwetness";
+            } else {
+                // go nowhere
+                window.location.href = "dashboard.html";
+            }
+        }).error( function() {
+            // go nowhere
+            window.location.href = "dashboard.html";
+        });
+    });
+
+
+//----------------------
+
     $("#menu-logout").click(function() {
         // Delete access token from local storage.
         delete localStorage.accessToken;
