@@ -199,6 +199,110 @@ $(function() {
         }
     });
 
+    $('#leafwetness-button').click(function() {
+				$.ajax({
+            url: 'http://localhost:8000/env_data?vineyard_id=0&env_variable=leafwetness',
+            type: "GET"
+        }).done(function(json) {
+            if (json.env_data) {
+                window.location.href = "http://localhost:8000/env_data?vineyard_id=0&env_variable=leafwetness";
+            } else {
+                window.location.href = "dashboard.html";
+                /* TODO: add error handing message*/
+            }
+        }).error( function() {
+            window.location.href = "dashboard.html";
+            /* TODO: add error handing message*/
+        });
+    });
+
+
+    $('#temperature-button').click(function() {
+				$.ajax({
+            url: 'http://localhost:8000/env_data?vineyard_id=0&env_variable=temperature',
+            type: "GET"
+        }).done(function(json) {
+            if (json.env_data) {
+                window.location.href = "http://localhost:8000/env_data?vineyard_id=0&env_variable=temperature";
+            } else {
+                window.location.href = "dashboard.html";
+                /* TODO: add error handing message*/
+            }
+        }).error( function() {
+            window.location.href = "dashboard.html";
+            /* TODO: add error handing message*/
+        });
+    });
+
+    $('#humidity-button').click(function() {
+				$.ajax({
+            url: 'http://localhost:8000/env_data?vineyard_id=0&env_variable=humidity',
+            type: "GET"
+        }).done(function(json) {
+            if (json.env_data) {
+                window.location.href = "http://localhost:8000/env_data?vineyard_id=0&env_variable=humidity";
+            } else {
+                window.location.href = "dashboard.html";
+                /* TODO: add error handing message*/
+            }
+        }).error( function() {
+            window.location.href = "dashboard.html";
+            /* TODO: add error handing message*/
+        });
+    });
+
+    $('#menu-leafwetness').click(function() {
+				$.ajax({
+            url: 'http://localhost:8000/env_data?vineyard_id=0&env_variable=leafwetness',
+            type: "GET"
+        }).done(function(json) {
+            if (json.env_data) {
+                window.location.href = "http://localhost:8000/env_data?vineyard_id=0&env_variable=leafwetness";
+            } else {
+                window.location.href = "dashboard.html";
+                /* TODO: add error handing message*/
+            }
+        }).error( function() {
+            window.location.href = "dashboard.html";
+            /* TODO: add error handing message*/
+        });
+    });
+
+
+    $('#menu-temperature').click(function() {
+				$.ajax({
+            url: 'http://localhost:8000/env_data?vineyard_id=0&env_variable=temperature',
+            type: "GET"
+        }).done(function(json) {
+            if (json.env_data) {
+                window.location.href = "http://localhost:8000/env_data?vineyard_id=0&env_variable=temperature";
+            } else {
+                window.location.href = "dashboard.html";
+                /* TODO: add error handing message*/
+            }
+        }).error( function() {
+            window.location.href = "dashboard.html";
+            /* TODO: add error handing message*/
+        });
+    });
+
+    $('#menu-humidity').click(function() {
+				$.ajax({
+            url: 'http://localhost:8000/env_data?vineyard_id=0&env_variable=humidity',
+            type: "GET"
+        }).done(function(json) {
+            if (json.env_data) {
+                window.location.href = "http://localhost:8000/env_data?vineyard_id=0&env_variable=humidity";
+            } else {
+                window.location.href = "dashboard.html";
+                /* TODO: add error handing message*/
+            }
+        }).error( function() {
+            window.location.href = "dashboard.html";
+            /* TODO: add error handing message*/
+        });
+    });
+
     $("#menu-logout").click(function() {
         // Delete access token from local storage.
         delete localStorage.accessToken;
