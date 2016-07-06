@@ -207,12 +207,12 @@ $(function() {
             if (json.env_data) {
                 window.location.href = "http://localhost:8000/env_data?vineyard_id=0&env_variable=leafwetness";
             } else {
-                // go nowhere
                 window.location.href = "dashboard.html";
+                /* TODO: add error handing message*/
             }
         }).error( function() {
-            // go nowhere
             window.location.href = "dashboard.html";
+            /* TODO: add error handing message*/
         });
     });
 
@@ -225,12 +225,12 @@ $(function() {
             if (json.env_data) {
                 window.location.href = "http://localhost:8000/env_data?vineyard_id=0&env_variable=temperature";
             } else {
-                // go nowhere
                 window.location.href = "dashboard.html";
+                /* TODO: add error handing message*/
             }
         }).error( function() {
-            // go nowhere
             window.location.href = "dashboard.html";
+            /* TODO: add error handing message*/
         });
     });
 
@@ -242,12 +242,12 @@ $(function() {
             if (json.env_data) {
                 window.location.href = "http://localhost:8000/env_data?vineyard_id=0&env_variable=humidity";
             } else {
-                // go nowhere
                 window.location.href = "dashboard.html";
+                /* TODO: add error handing message*/
             }
         }).error( function() {
-            // go nowhere
             window.location.href = "dashboard.html";
+            /* TODO: add error handing message*/
         });
     });
 
@@ -259,12 +259,12 @@ $(function() {
             if (json.env_data) {
                 window.location.href = "http://localhost:8000/env_data?vineyard_id=0&env_variable=leafwetness";
             } else {
-                // go nowhere
                 window.location.href = "dashboard.html";
+                /* TODO: add error handing message*/
             }
         }).error( function() {
-            // go nowhere
             window.location.href = "dashboard.html";
+            /* TODO: add error handing message*/
         });
     });
 
@@ -277,12 +277,12 @@ $(function() {
             if (json.env_data) {
                 window.location.href = "http://localhost:8000/env_data?vineyard_id=0&env_variable=temperature";
             } else {
-                // go nowhere
                 window.location.href = "dashboard.html";
+                /* TODO: add error handing message*/
             }
         }).error( function() {
-            // go nowhere
             window.location.href = "dashboard.html";
+            /* TODO: add error handing message*/
         });
     });
 
@@ -294,12 +294,12 @@ $(function() {
             if (json.env_data) {
                 window.location.href = "http://localhost:8000/env_data?vineyard_id=0&env_variable=humidity";
             } else {
-                // go nowhere
                 window.location.href = "dashboard.html";
+                /* TODO: add error handing message*/
             }
         }).error( function() {
-            // go nowhere
             window.location.href = "dashboard.html";
+            /* TODO: add error handing message*/
         });
     });
 
