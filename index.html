@@ -1,1 +1,59 @@
-login.html
+<!DOCTYPE html>
+
+<!--
+  Plantalytics
+    Copyright (c) 2016 Sapphire Becker, Katy Brimm, Scott Ewing,
+      Matt Fraser, Kelly Ledford, Michael Limb, Steven Ngo, Eric Turley.
+    This project is licensed under the MIT License.
+    Please see the file LICENSE in this distribution for license terms.
+  Contact: plantalytics.capstone@gmail.com
+-->
+
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Plantalytics Login</title>
+
+        <!-- Includes -->
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+        <script src="http://code.jquery.com/jquery-2.0.0.js"> </script>
+        <link rel="stylesheet" href="css/index.css"/>
+        <script type="text/javascript" src="js/index.js"> </script>
+        <script type="text/javascript" src="js/config.js"></script>
+
+        <!-- Favicon Links -->
+        <link sizes="32x32" href="http://plantalytics.us/wp-content/uploads/2016/03/cropped-Leaves-32x32.png" rel="icon">
+        <link sizes="192x192" href="http://plantalytics.us/wp-content/uploads/2016/03/cropped-Leaves-192x192.png" rel="icon">
+        <link href="http://plantalytics.us/wp-content/uploads/2016/03/cropped-Leaves-180x180.png" rel="apple-touch-icon-precomposed">
+        <meta content="http://plantalytics.us/wp-content/uploads/2016/03/cropped-Leaves-270x270.png" name="msapplication-TileImage">
+    </head>
+    <body>
+        <div class="container">
+            <img src="images/logo.png" id="logo" alt="Plantalytics Precision Agriculture logo">
+            <p class="centerBlock">
+                <strong>Plantalytics User Login</strong>
+                <br>
+                <strong class="error" id="loginError"></strong>
+            </p>
+            <p class="centerBlock">
+                <label for="login">Username </label>
+                <input class="textBox" type="text" id="loginUsername" />
+            </p>
+            <p class="centerBlock">
+                <label for="password">Password </label>
+                <!-- Will connect with password reset page once implemented -->
+                <a href="#" tabindex="-1" title="Forgot your password?">?</a>
+                <input class="textBox" type="password" id="loginPassword" />
+            </p>
+            <p class="centerBlock">
+                <input id="loginButton" class="button" type="button" value="Login" />
+                <br>
+            </p>
+            <p class="centerBlock">
+                <!-- Will connect with account singup page once implemented -->
+                <a href="#">Get Plantalytics</a>
+            </p>
+        </div>
+    </body>
+</html>

@@ -16,7 +16,7 @@ $(function() {
 
     // Make sure the user has a login token before continuing.
     if (!localStorage.accessToken) {
-      window.location = "login.html";
+      window.location = "index.html";
     }
 
     ({
@@ -308,6 +308,6 @@ $(function() {
         delete localStorage.accessToken;
 
         // Redirect to login page
-        window.location = "login.html";
+        window.location = "index.html";
     });
 });
