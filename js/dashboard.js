@@ -201,11 +201,11 @@ $(function() {
 
     $('#leafwetness-button').click(function() {
 				$.ajax({
-            url: 'http://localhost:8000/env_data?vineyard_id=0&env_variable=leafwetness',
+            url: backendIpAddress + 'env_data?vineyard_id=0&env_variable=leafwetness',
             type: "GET"
         }).done(function(json) {
             if (json.env_data) {
-                window.location.href = "http://localhost:8000/env_data?vineyard_id=0&env_variable=leafwetness";
+                window.location.href = backendIpAddress + "env_data?vineyard_id=0&env_variable=leafwetness";
             } else {
                 window.location.href = "dashboard.html";
                 /* TODO: add error handing message*/
@@ -219,11 +219,11 @@ $(function() {
 
     $('#temperature-button').click(function() {
 				$.ajax({
-            url: 'http://localhost:8000/env_data?vineyard_id=0&env_variable=temperature',
+            url: backendIpAddress + 'env_data?vineyard_id=0&env_variable=temperature',
             type: "GET"
         }).done(function(json) {
             if (json.env_data) {
-                window.location.href = "http://localhost:8000/env_data?vineyard_id=0&env_variable=temperature";
+                window.location.href = backendIpAddress + "env_data?vineyard_id=0&env_variable=temperature";
             } else {
                 window.location.href = "dashboard.html";
                 /* TODO: add error handing message*/
@@ -236,11 +236,11 @@ $(function() {
 
     $('#humidity-button').click(function() {
 				$.ajax({
-            url: 'http://localhost:8000/env_data?vineyard_id=0&env_variable=humidity',
+            url: backendIpAddress + 'env_data?vineyard_id=0&env_variable=humidity',
             type: "GET"
         }).done(function(json) {
             if (json.env_data) {
-                window.location.href = "http://localhost:8000/env_data?vineyard_id=0&env_variable=humidity";
+                window.location.href = backendIpAddress + "env_data?vineyard_id=0&env_variable=humidity";
             } else {
                 window.location.href = "dashboard.html";
                 /* TODO: add error handing message*/
@@ -253,11 +253,11 @@ $(function() {
 
     $('#menu-leafwetness').click(function() {
 				$.ajax({
-            url: 'http://localhost:8000/env_data?vineyard_id=0&env_variable=leafwetness',
+            url: backendIpAddress + 'env_data?vineyard_id=0&env_variable=leafwetness',
             type: "GET"
         }).done(function(json) {
             if (json.env_data) {
-                window.location.href = "http://localhost:8000/env_data?vineyard_id=0&env_variable=leafwetness";
+                window.location.href = backendIpAddress + "env_data?vineyard_id=0&env_variable=leafwetness";
             } else {
                 window.location.href = "dashboard.html";
                 /* TODO: add error handing message*/
@@ -271,11 +271,11 @@ $(function() {
 
     $('#menu-temperature').click(function() {
 				$.ajax({
-            url: 'http://localhost:8000/env_data?vineyard_id=0&env_variable=temperature',
+            url: backendIpAddress + 'env_data?vineyard_id=0&env_variable=temperature',
             type: "GET"
         }).done(function(json) {
             if (json.env_data) {
-                window.location.href = "http://localhost:8000/env_data?vineyard_id=0&env_variable=temperature";
+                window.location.href = backendIpAddress + "env_data?vineyard_id=0&env_variable=temperature";
             } else {
                 window.location.href = "dashboard.html";
                 /* TODO: add error handing message*/
@@ -288,11 +288,11 @@ $(function() {
 
     $('#menu-humidity').click(function() {
 				$.ajax({
-            url: 'http://localhost:8000/env_data?vineyard_id=0&env_variable=humidity',
+            url: backendIpAddress + 'env_data?vineyard_id=0&env_variable=humidity',
             type: "GET"
         }).done(function(json) {
             if (json.env_data) {
-                window.location.href = "http://localhost:8000/env_data?vineyard_id=0&env_variable=humidity";
+                window.location.href = backendIpAddress + "env_data?vineyard_id=0&env_variable=humidity";
             } else {
                 window.location.href = "dashboard.html";
                 /* TODO: add error handing message*/

@@ -31,7 +31,7 @@ $(function() {
          * once backend support allows
          */
         $.ajax({
-            url: 'http://localhost:8000/login?username=' + $('#loginUsername').val()
+            url: backendIpAddress + 'login?username=' + $('#loginUsername').val()
                     + '&password=' + $('#loginPassword').val(),
             type: "GET"
         }).done(function(json) {
