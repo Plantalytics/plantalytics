@@ -36,18 +36,6 @@ $(function() {
             "lat": 45.281041,
             "lng": -123.061896
         },
-        // Node locations & values [lat, lon, val], ...
-        'nodeLoc': [
-            [45.281679, -123.062533, 58],
-            [45.281554, -123.061838, 17],
-            [45.281423, -123.061124, 55],
-            [45.281249, -123.062615, 25],
-            [45.281123, -123.061897, 42],
-            [45.280989, -123.061145, 51],
-            [45.280800, -123.062877, 17],
-            [45.280680, -123.062076, 21],
-            [45.280511, -123.061333, 66]
-        ],
         // Boundary coords [lat, lon], ...
         // Must be listed in drawing order
         'propertyBoundary': [
@@ -64,7 +52,7 @@ $(function() {
 
 ////////////////////////////////// Map code ///////////////////////////////////
 
-var map, mapsReady = false, mapsData = null;
+var map, mapsReady = false, mapsData = null, idw = L.idwLayer([], {});
 function createMap(data) {
     // Calculate map bounds
     var latOffset = .00145; // Perhaps calculate these offsets based
@@ -88,42 +76,30 @@ function createMap(data) {
     var zoom = L.control.zoom({'position': 'topright'});
     map.addControl(zoom);
 
-    // Set default map view upon map creation
-    if (localStorage) {
-        if (!localStorage.defaultDataView) {
-            localStorage.defaultDataView = '.data-button-label.temperature';
-        }
-        $(".data-buttons " + localStorage.defaultDataView).click();
-        $(".data-view-defaults " + localStorage.defaultDataView + " input").prop("checked", true);
-    }
-
-    //////////////////////// Generate IDW Interpolation ////////////////////////
-    var idw = L.idwLayer(data.nodeLoc , {
-        opacity: 0.4,  // Interpolation layer opacity
-        maxZoom: 20,
-        cellSize: 5,   // CellSize determines interpolation granularity
-        exp: 3,        // Exponent used for weighting
-        // Max varies based on condition/value
-        max: 66,       // Point value ceiling
-        gradient: {    // Gradient assignment red (hi) -> violet (lo)
-            0.0: 'violet',
-            0.1: 'blueviolet',
-            0.2: 'blue',
-            0.3: 'darkcyan',
-            0.4: 'green',
-            0.5: 'greenyellow',
-            0.6: 'yellowgreen',
-            0.7: 'yellow',
-            0.8: 'orange',
-            0.9: 'orangered',
-            1.0: 'red'
-        }
-    }).addTo(map);
-
     ////////////////////// Set Property Boundary Vertices //////////////////////
     var propertyBoundary = L.polygon(data.propertyBoundary, {
         fillOpacity: 0
     }).addTo(map);
+
+    ////////////////////////    Set Default Map View    ////////////////////////
+    //////////////////////// Generate IDW Interpolation ////////////////////////
+    if (localStorage) {
+        if (!localStorage.defaultDataView) {
+            localStorage.defaultDataView = '.data-button-label.temperature';
+        }
+        // $(".data-buttons " + localStorage.defaultDataView).click();
+        switch (localStorage.defaultDataView) {
+            case '.data-button-label.leaf-wetness':
+                $('#leafwetness-button').click();
+                break;
+            case '.data-button-label.temperature':
+                $('#temperature-button').click();
+                break;
+            case '.data-button-label.humidity':
+                $('#humidity-button').click();
+        }
+        $(".data-view-defaults " + localStorage.defaultDataView + " input").prop("checked", true);
+    }
 }
 
 function readyMap() {
