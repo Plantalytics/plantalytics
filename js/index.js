@@ -42,7 +42,7 @@ $(function() {
                 // Show error message.
                 $("#loginError").text("Error logging in.");
             }
-        }).error( function() {
+        }).fail(function() {
             // Show error message
             $("#loginError").text("Error logging in.");
         });
