@@ -10,6 +10,7 @@
 $.getScript('http://www.mapquestapi.com/sdk/leaflet/v2.2/mq-map.js?key=' + mapQuestKey, readyMap);
 
 /////////////////////////////////// On Load ///////////////////////////////////
+
 $(function() {
     // Get information for our current user.
     // TODO: $.ajax({...})
@@ -22,14 +23,14 @@ $(function() {
     ({
         "url": "",
         "dataType": "json",
-        "success": function (data) {
+        "done": function (data) {
             if (mapsReady) {
                 createMap(data);
             } else {
                 delayMapCreation(data);
             }
-        },
-    }).success({
+        }
+    }).done({
         // Vineyard center [lat, lon]
         "center": {
             "lat": 45.281041,
@@ -62,6 +63,7 @@ $(function() {
 });
 
 ////////////////////////////////// Map code ///////////////////////////////////
+
 var map, mapsReady = false, mapsData = null;
 function createMap(data) {
     // Calculate map bounds
@@ -88,11 +90,11 @@ function createMap(data) {
 
     // Set default map view upon map creation
     if (localStorage) {
-        var defaultDataView = localStorage.defaultDataView;
-        if (defaultDataView) {
-            $(".data-buttons " + defaultDataView).click();
-            $(".data-view-defaults " + defaultDataView + " input").prop("checked", true);
+        if (!localStorage.defaultDataView) {
+            localStorage.defaultDataView = '.data-button-label.temperature';
         }
+        $(".data-buttons " + localStorage.defaultDataView).click();
+        $(".data-view-defaults " + localStorage.defaultDataView + " input").prop("checked", true);
     }
 
     //////////////////////// Generate IDW Interpolation ////////////////////////
@@ -138,176 +140,4 @@ function delayMapCreation(data) {
 // Re-centers the map on double-click
 $(window).dblclick(function() {
     map.panTo(mapsData.center);
-});
-
-//////////////////////////////// Controls code ////////////////////////////////
-$(function() {
-    $("#menu").click(function() {
-        var $menu = $(".menu");
-        var visible = $menu.is(":visible");
-        $menu.show();
-        var width = $menu.width();
-        var height = $menu.height();
-        if (!$menu.is(':animated')) {
-            if (visible) {
-                // Animate hiding menu.
-                $menu.animate({
-                    "height": 10,
-                }, {
-                    "duration": 150,
-                }).animate({
-                    "width": 0,
-                }, {
-                    "duration": 300,
-                    "queue": true,
-                    "complete": function() {
-                        $menu.width(width);
-                        $menu.height(height);
-                        $menu.hide();
-                        isAnimating = false;
-                    }
-                });
-            } else {
-                // Animate showing menu.
-                $menu.width(0).height(10);
-                $menu.animate({
-                    "width": width,
-                }, {
-                    "duration": 150,
-                }).animate({
-                    "height": height,
-                }, {
-                    "duration": 300,
-                    "queue": true
-                });
-            }
-        }
-    });
-
-    $(".data-view-defaults .data-button-label div").click(function(e) {
-        var parent = $(this).parent();
-        var selector = "." + parent.attr("class").replace(/ /g, ".");
-        if (localStorage.defaultDataView == selector) {
-            // Double tap to turn off.
-            delete localStorage.defaultDataView;
-            setTimeout(function() {
-                parent.find("input").prop("checked", false);
-            }, 10);
-        } else {
-            // Set new default.
-            localStorage.defaultDataView = selector;
-        }
-    });
-
-    $('#leafwetness-button').click(function() {
-				$.ajax({
-            url: backendIpAddress + 'env_data?vineyard_id=0&env_variable=leafwetness',
-            type: "GET"
-        }).done(function(json) {
-            if (json.env_data) {
-                window.location.href = backendIpAddress + "env_data?vineyard_id=0&env_variable=leafwetness";
-            } else {
-                window.location.href = "dashboard.html";
-                /* TODO: add error handing message*/
-            }
-        }).error( function() {
-            window.location.href = "dashboard.html";
-            /* TODO: add error handing message*/
-        });
-    });
-
-
-    $('#temperature-button').click(function() {
-				$.ajax({
-            url: backendIpAddress + 'env_data?vineyard_id=0&env_variable=temperature',
-            type: "GET"
-        }).done(function(json) {
-            if (json.env_data) {
-                window.location.href = backendIpAddress + "env_data?vineyard_id=0&env_variable=temperature";
-            } else {
-                window.location.href = "dashboard.html";
-                /* TODO: add error handing message*/
-            }
-        }).error( function() {
-            window.location.href = "dashboard.html";
-            /* TODO: add error handing message*/
-        });
-    });
-
-    $('#humidity-button').click(function() {
-				$.ajax({
-            url: backendIpAddress + 'env_data?vineyard_id=0&env_variable=humidity',
-            type: "GET"
-        }).done(function(json) {
-            if (json.env_data) {
-                window.location.href = backendIpAddress + "env_data?vineyard_id=0&env_variable=humidity";
-            } else {
-                window.location.href = "dashboard.html";
-                /* TODO: add error handing message*/
-            }
-        }).error( function() {
-            window.location.href = "dashboard.html";
-            /* TODO: add error handing message*/
-        });
-    });
-
-    $('#menu-leafwetness').click(function() {
-				$.ajax({
-            url: backendIpAddress + 'env_data?vineyard_id=0&env_variable=leafwetness',
-            type: "GET"
-        }).done(function(json) {
-            if (json.env_data) {
-                window.location.href = backendIpAddress + "env_data?vineyard_id=0&env_variable=leafwetness";
-            } else {
-                window.location.href = "dashboard.html";
-                /* TODO: add error handing message*/
-            }
-        }).error( function() {
-            window.location.href = "dashboard.html";
-            /* TODO: add error handing message*/
-        });
-    });
-
-
-    $('#menu-temperature').click(function() {
-				$.ajax({
-            url: backendIpAddress + 'env_data?vineyard_id=0&env_variable=temperature',
-            type: "GET"
-        }).done(function(json) {
-            if (json.env_data) {
-                window.location.href = backendIpAddress + "env_data?vineyard_id=0&env_variable=temperature";
-            } else {
-                window.location.href = "dashboard.html";
-                /* TODO: add error handing message*/
-            }
-        }).error( function() {
-            window.location.href = "dashboard.html";
-            /* TODO: add error handing message*/
-        });
-    });
-
-    $('#menu-humidity').click(function() {
-				$.ajax({
-            url: backendIpAddress + 'env_data?vineyard_id=0&env_variable=humidity',
-            type: "GET"
-        }).done(function(json) {
-            if (json.env_data) {
-                window.location.href = backendIpAddress + "env_data?vineyard_id=0&env_variable=humidity";
-            } else {
-                window.location.href = "dashboard.html";
-                /* TODO: add error handing message*/
-            }
-        }).error( function() {
-            window.location.href = "dashboard.html";
-            /* TODO: add error handing message*/
-        });
-    });
-
-    $("#menu-logout").click(function() {
-        // Delete access token from local storage.
-        delete localStorage.accessToken;
-
-        // Redirect to login page
-        window.location = "index.html";
-    });
 });
