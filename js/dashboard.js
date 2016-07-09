@@ -33,8 +33,8 @@ $(function() {
     }).done({
         // Vineyard center [lat, lon]
         "center": {
-            "lat": 45.281041,
-            "lng": -123.061896
+            "lat": 45.28104,
+            "lng": -123.0619
         },
         // Boundary coords [lat, lon], ...
         // Must be listed in drawing order
@@ -87,17 +87,7 @@ function createMap(data) {
         if (!localStorage.defaultDataView) {
             localStorage.defaultDataView = '.data-button-label.temperature';
         }
-        // $(".data-buttons " + localStorage.defaultDataView).click();
-        switch (localStorage.defaultDataView) {
-            case '.data-button-label.leaf-wetness':
-                $('#leafwetness-button').click();
-                break;
-            case '.data-button-label.temperature':
-                $('#temperature-button').click();
-                break;
-            case '.data-button-label.humidity':
-                $('#humidity-button').click();
-        }
+        $(".data-buttons " + localStorage.defaultDataView + " input").click();
         $(".data-view-defaults " + localStorage.defaultDataView + " input").prop("checked", true);
     }
 }
