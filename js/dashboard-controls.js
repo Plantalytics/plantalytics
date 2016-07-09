@@ -69,7 +69,12 @@ $(function() {
 
     $('#leafwetness-button').click(function() {
         $.ajax({
-            url: backendIpAddress + 'env_data?vineyard_id=0&env_variable=leafwetness',
+            url: backendIpAddress + 'env_data',
+            data: {
+              vineyard_id: 1,
+              env_variable: 'leafwetness'
+            },
+            dataType: 'json',
             type: "GET"
         }).done(function(json) {
             if (json.env_data) {
@@ -88,7 +93,12 @@ $(function() {
 
     $('#temperature-button').click(function() {
         $.ajax({
-            url: backendIpAddress + 'env_data?vineyard_id=0&env_variable=temperature',
+            url: backendIpAddress + 'env_data',
+            data: {
+              vineyard_id: 1,
+              env_variable: 'temperature'
+            },
+            dataType: 'json',
             type: "GET"
         }).done(function(json) {
             if (json.env_data) {
@@ -107,7 +117,12 @@ $(function() {
 
     $('#humidity-button').click(function() {
         $.ajax({
-            url: backendIpAddress + 'env_data?vineyard_id=0&env_variable=humidity',
+            url: backendIpAddress + 'env_data',
+            data: {
+              vineyard_id: 1,
+              env_variable: 'humidity'
+            },
+            dataType: 'json',
             type: "GET"
         }).done(function(json) {
             if (json.env_data) {
