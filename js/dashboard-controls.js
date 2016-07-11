@@ -32,7 +32,6 @@ $(function() {
                         $menu.width(width);
                         $menu.height(height);
                         $menu.hide();
-                        isAnimating = false;
                     }
                 });
             } else {
