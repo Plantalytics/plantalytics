@@ -66,77 +66,11 @@ $(function() {
         }
     });
 
-    $('#leafwetness-button').click(function() {
-        $.ajax({
-            url: backendIpAddress + 'env_data',
-            data: {
-              vineyard_id: 1,
-              env_variable: 'leafwetness'
-            },
-            dataType: 'json',
-            type: "GET"
-        }).done(function(json) {
-            if (json.env_data) {
-                var envData = parseEnvData(json.env_data, 'lw');
-                map.removeLayer(idw);
-                idw = L.idwLayer(envData, idwOptions).addTo(map);
-            } else {
-                window.location.href = "dashboard.html";
-                /* TODO: add error handing message*/
-            }
-        }).fail(function() {
-            window.location.href = "dashboard.html";
-            /* TODO: add error handing message*/
-        });
-    });
+    $('#leafwetness-button').click(makeGetEnvData("leafwetness"));
 
-    $('#temperature-button').click(function() {
-        $.ajax({
-            url: backendIpAddress + 'env_data',
-            data: {
-              vineyard_id: 1,
-              env_variable: 'temperature'
-            },
-            dataType: 'json',
-            type: "GET"
-        }).done(function(json) {
-            if (json.env_data) {
-                var envData = parseEnvData(json.env_data, 'tmp');
-                map.removeLayer(idw);
-                idw = L.idwLayer(envData, idwOptions).addTo(map);
-            } else {
-                window.location.href = "dashboard.html";
-                /* TODO: add error handing message*/
-            }
-        }).fail(function() {
-            window.location.href = "dashboard.html";
-            /* TODO: add error handing message*/
-        });
-    });
+    $('#temperature-button').click(makeGetEnvData("temperature"));
 
-    $('#humidity-button').click(function() {
-        $.ajax({
-            url: backendIpAddress + 'env_data',
-            data: {
-              vineyard_id: 1,
-              env_variable: 'humidity'
-            },
-            dataType: 'json',
-            type: "GET"
-        }).done(function(json) {
-            if (json.env_data) {
-                var envData = parseEnvData(json.env_data, 'hum');
-                map.removeLayer(idw);
-                idw = L.idwLayer(envData, idwOptions).addTo(map);
-            } else {
-                window.location.href = "dashboard.html";
-                /* TODO: add error handing message*/
-            }
-        }).fail(function() {
-            window.location.href = "dashboard.html";
-            /* TODO: add error handing message*/
-        });
-    });
+    $('#humidity-button').click(makeGetEnvData("humidity"));
 
     $("#menu-logout").click(function() {
         // Delete access token from local storage.
@@ -147,6 +81,30 @@ $(function() {
     });
 });
 
+function makeGetEnvData(env_variable) {
+    return function () {
+        $.ajax({
+            "url": backendIpAddress + "env_data",
+            "data": {
+              "vineyard_id": 1,
+              "env_variable": env_variable,
+            },
+            "dataType": "json",
+            "type": "GET",
+        }).done(function(json) {
+            if (json.env_data) {
+                var envData = parseEnvData(json.env_data, env_variable);
+                map.removeLayer(idw);
+                idw = L.idwLayer(envData, idwOptions).addTo(map);
+            } else {
+                /* TODO: add error handing message*/
+            }
+        }).fail(function() {
+            /* TODO: add error handing message*/
+        });
+    }
+}
+
 function parseEnvData(envData, envDataType) {
     var parsedData = [];
     for (var i = 0; i < envData.length; ++i) {
@@ -154,13 +112,13 @@ function parseEnvData(envData, envDataType) {
         envDataItem[0] = envData[i].latitude;
         envDataItem[1] = envData[i].longitude;
         switch (envDataType) {
-          case 'lw':
+          case "leafwetness":
             envDataItem[2] = envData[i].leafwetness;
             break;
-          case 'tmp':
+          case "temperature":
             envDataItem[2] = envData[i].temperature;
             break;
-          case 'hum':
+          case "humidity":
             envDataItem[2] = envData[i].humidity;
         }
 
