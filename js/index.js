@@ -31,8 +31,11 @@ $(function() {
          * once backend support allows
          */
         $.ajax({
-            url: backendIpAddress + 'login?username=' + $('#loginUsername').val()
-                    + '&password=' + $('#loginPassword').val(),
+            url: backendIpAddress + 'login', 
+            "data": {
+                "username": $('#loginUsername').val(),
+                "password": $('#loginPassword').val(),
+            },
             type: "GET"
         }).done(function(json) {
             if (json.token) {
