@@ -1,0 +1,124 @@
+/*
+ * Plantalytics
+ *     Copyright (c) 2016 Sapphire Becker, Katy Brimm, Scott Ewing,
+ *       Matt Fraser, Kelly Ledford, Michael Limb, Steven Ngo, Eric Turley.
+ *     This project is licensed under the MIT License.
+ *     Please see the file LICENSE in this distribution for license terms.
+ * Contact: plantalytics.capstone@gmail.com
+ */
+
+/* Large screen display container settings */
+/* Container and logo appear smaller */
+@media screen and (min-width:640px) {
+    div.container {
+        width: 75%;
+        margin: auto;
+    }
+
+    #logo {
+        position: relative;
+        top: 0px;
+        left: 0px;
+        width: 50%;
+        margin-left: 25%;
+        margin-right: 25%;
+    }
+}
+
+/* Small screen display container settings */
+/* Container and logo appear larger */
+@media screen and (max-width:640px) {
+    div.container {
+        width: 100%;
+    }
+
+    #logo {
+        position: relative;
+        top: 0px;
+        left: 0px;
+        width: 85%;
+        margin-left: 7.5%;
+        margin-right: 7.5%;
+    }
+}
+
+/* General page style */
+body {
+    background: white;
+    color: black;
+    font-family: "Open Sans", sans-serif;
+    padding: 0px;
+    margin: 0px;
+}
+
+br {
+    margin-bottom: .5em;
+}
+
+strong {
+    color: black;
+    font-size: 110%;
+}
+
+strong.error {
+    color: red;
+}
+
+/* Link style */
+a:link {
+    color: olivedrab;
+    font-weight: 600;
+    text-decoration: underline;
+}
+
+a:active {
+    color: dimgray;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+a:hover {
+    color: dimgray;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+a:visited {
+    color: olivedrab;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+/* Centers item, treats as a block object */
+p.centerBlock {
+    display: block;
+    text-align: center;
+    margin: auto;
+    margin-bottom: .5em;
+}
+
+/* Input style */
+/* Applies to buttons and fields */
+input {
+    border: black solid 1px;
+    border-radius: 6px;
+    background: white;
+    padding-left: .5em;
+    padding-right: .5em;
+    font-size: 100%;
+}
+
+/* Button styles */
+input.button {
+    border: olivedrab solid 2px;
+    background: darkolivegreen;
+    padding: .25em;
+    padding-left: 1em;
+    padding-right: 1em;
+    color: beige;
+}
+
+input.button:active {
+    border: darkolivegreen solid 2px;
+    background: dimgray;
+}

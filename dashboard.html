@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<!--
+  Plantalytics
+    Copyright (c) 2016 Sapphire Becker, Katy Brimm, Scott Ewing,
+      Matt Fraser, Kelly Ledford, Michael Limb, Steven Ngo, Eric Turley.
+    This project is licensed under the MIT License.
+    Please see the file LICENSE in this distribution for license terms.
+  Contact: plantalytics.capstone@gmail.com
+-->
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>My Vineyard - Plantalytics</title>
+
+        <!------------------------------ CDNs ------------------------------>
+
+        <!-- Fonts -->
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+        <!-- jQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+
+        <!-- Leaflet -->
+        <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
+        <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
+
+        <!--------------------------- Local Files --------------------------->
+
+        <!-- Favicon Links -->
+        <link sizes="32x32" href="http://plantalytics.us/wp-content/uploads/2016/03/cropped-Leaves-32x32.png" rel="icon">
+        <link sizes="192x192" href="http://plantalytics.us/wp-content/uploads/2016/03/cropped-Leaves-192x192.png" rel="icon">
+        <link href="http://plantalytics.us/wp-content/uploads/2016/03/cropped-Leaves-180x180.png" rel="apple-touch-icon-precomposed">
+        <meta content="http://plantalytics.us/wp-content/uploads/2016/03/cropped-Leaves-270x270.png" name="msapplication-TileImage">
+
+        <!-- Leaflet IDW Plugin -->
+        <script src="js/leaflet-idw.js"></script>
+
+        <!-- Our Styles & Scripts -->
+        <link rel="stylesheet" href="css/dashboard.css"/>
+        <script type="text/javascript" src="js/config.js"></script>
+        <script type="text/javascript" src="js/dashboard.js"></script>
+        <script type="text/javascript" src="js/dashboard-controls.js"></script>
+        <script type="text/javascript" src="js/idw-config.js"></script>
+    </head>
+    <body>
+        <div id="map"></div>
+        <div class="map-overlay">
+            <span class="data-buttons">
+                <label class="data-button-label leaf-wetness">
+                    <input id="leafwetness-button" type="radio" name="data-view" />
+                    <div class="data-button" title="Leaf wetness"></div>
+                </label>
+                <label class="data-button-label temperature">
+                    <input id="temperature-button" type="radio" name="data-view" />
+                    <div class="data-button" title="Temperature"></div>
+                </label>
+                <label class="data-button-label humidity">
+                    <input id="humidity-button" type="radio" name="data-view" />
+                    <div class="data-button" title="Humidity"></div>
+                </label>
+            </span>
+
+            <div class="menu-control">
+                <div class="menu-button" id="menu" title="Menu"></div>
+                <div class="menu">
+                    <div class="menu-group">
+                        <div class="menu-entry-unselectable centered">Default view</div>
+                        <div class="menu-entry-unselectable data-view-defaults">
+                            <label class="data-button-label leaf-wetness">
+                                <input id="menu-leafwetness" type="radio" name="data-view-default" />
+                                <div class="data-button" title="Leaf wetness"></div>
+                            </label>
+                            <label class="data-button-label temperature">
+                                <input id="menu-temperature" type="radio" name="data-view-default" />
+                                <div class="data-button" title="Temperature"></div>
+                            </label>
+                            <label class="data-button-label humidity">
+                                <input id="menu-humidity" type="radio" name="data-view-default" />
+                                <div class="data-button" title="Humidity"></div>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="menu-group">
+                        <div class="menu-entry" id="menu-logout">Logout</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
