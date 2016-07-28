@@ -31,12 +31,12 @@ $(function() {
          * once backend support allows
          */
         $.ajax({
-            url: backendIpAddress + 'login',
-            data: JSON.stringify({
+            "url": backendIpAddress + "login",
+            "data": JSON.stringify({
                 "username": $('#loginUsername').val(),
                 "password": $('#loginPassword').val()
             }),
-            type: "POST"
+            "type": "POST"
         }).done(function(json) {
             if (json.token) {
                 localStorage.accessToken = json.token;
