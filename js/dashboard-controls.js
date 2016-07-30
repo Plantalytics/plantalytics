@@ -88,6 +88,7 @@ function makeGetEnvData(env_variable) {
             "data": {
               "vineyard_id": 1,
               "env_variable": env_variable,
+              "auth_token": localStorage.accessToken
             },
             "dataType": "json",
             "type": "GET",
