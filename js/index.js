@@ -38,8 +38,8 @@ $(function() {
             }),
             "type": "POST"
         }).done(function(json) {
-            if (json.token) {
-                localStorage.accessToken = json.token;
+            if (json.auth_token) {
+                localStorage.accessToken = json.auth_token;
                 window.location.href = "dashboard.html";
             } else {
                 // Show error message.
