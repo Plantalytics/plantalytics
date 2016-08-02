@@ -79,6 +79,47 @@ $(function() {
         // Redirect to login page
         window.location = "index.html";
     });
+
+    // Listener for "Change Password" button.
+    $("#menu-change-password").click(function() {
+        // TODO: Close menu button
+
+        // Prompt user for current password.
+        var oldPassword = prompt("Enter current password:", "");
+
+        /**
+         * Prompt user for a new password.
+         * Make sure that the user didn't cancel the previous dialog before proceeding.
+         */
+        var newPassword = null;
+        if (oldPassword != null) {
+            var newPassword = prompt("Enter new password:", "");
+        }
+
+        // Make sure the user didn't hit cancel on either prompt.
+        if (oldPassword != null &&
+                newPassword != null) {
+            // Call change password endpoint with entered data.
+            $.ajax({
+                "url": backendIpAddress + "password/change",
+                "data": JSON.stringify({
+                  "old": oldPassword,
+                  "password": newPassword,
+                  "auth_token": localStorage.accessToken
+                }),
+                "type": "POST",
+            }).done(function(json) {
+                // Let user know of success!
+                alert("Password changed successfully!");
+            }).fail(function(json) {
+                // Print response text if present
+                // TODO: Make this look user friendly
+                if (json.responseText) {
+                    alert("Error with request: " + json.responseText);
+                }
+            });
+        }
+    });
 });
 
 function makeGetEnvData(env_variable) {
