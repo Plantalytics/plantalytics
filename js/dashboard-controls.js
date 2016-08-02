@@ -85,12 +85,13 @@ function makeGetEnvData(env_variable) {
     return function () {
         $.ajax({
             "url": backendIpAddress + "env_data",
-            "data": {
+            "data": JSON.stringify({
               "vineyard_id": 1,
               "env_variable": env_variable,
-            },
+              "auth_token": localStorage.accessToken
+            }),
             "dataType": "json",
-            "type": "GET",
+            "type": "POST",
         }).done(function(json) {
             if (json.env_data) {
                 var envData = parseEnvData(json.env_data, env_variable);
