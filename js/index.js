@@ -93,5 +93,5 @@ $(function() {
 function revertToLogin() {
     $(".resetItem").hide();
     $(".loginItem").show();
-    $("#resetButton").prop("disabled", true);
+    $("#resetButton").prop("disabled", false);
 }
