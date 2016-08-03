@@ -112,10 +112,19 @@ $(function() {
                 // Let user know of success!
                 alert("Password changed successfully!");
             }).fail(function(json) {
-                // Print response text if present
-                // TODO: Make this look user friendly
-                if (json.responseText) {
-                    alert("Error with request: " + json.responseText);
+                // Show error if returned
+                // Parse response
+                var responseObject = JSON.parse(json.responseText);
+                if (responseObject &&
+                        responseObject.errors) {
+                    var errors = responseObject.errors;
+                    for (var errorCode in errors) {
+                        // Show first error
+                        alert(errors[errorCode]);
+                    }
+                } else {
+                    // Show generic error
+                    alert("An unknown error occurred. Please logout and log back in, then try again.");
                 }
             });
         }
