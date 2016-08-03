@@ -32,7 +32,8 @@
         <div class="container">
             <img src="images/logo.png" id="logo" alt="Plantalytics Precision Agriculture logo">
             <p class="centerBlock">
-                <strong>Plantalytics User Login</strong>
+                <strong class="loginItem">Plantalytics User Login</strong>
+                <strong class="resetItem">Plantalytics Password Recovery</strong>
                 <br>
                 <strong class="error" id="loginError"></strong>
             </p>
@@ -40,14 +41,14 @@
                 <label for="login">Username </label>
                 <input class="textBox" type="text" id="loginUsername" />
             </p>
-            <p class="centerBlock">
+            <p class="centerBlock loginItem">
                 <label for="password">Password </label>
-                <!-- Will connect with password reset page once implemented -->
-                <a href="#" tabindex="-1" title="Forgot your password?">?</a>
+                <a href="#" tabindex="-1" title="Forgot your password?" id="forgotPassword">?</a>
                 <input class="textBox" type="password" id="loginPassword" />
             </p>
             <p class="centerBlock">
-                <input id="loginButton" class="button" type="button" value="Login" />
+                <input id="loginButton" class="button loginItem submit" type="button" value="Login" />
+                <input id="resetButton" class="button resetItem submit" type="button" value="Request password reset" />
                 <br>
             </p>
             <p class="centerBlock">

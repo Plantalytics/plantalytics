@@ -13,7 +13,7 @@ $(function() {
      */
     $('#loginUsername').on('keypress', function(evt) {
         if (evt.which == 13 && !evt.shiftKey) {
-            $('#loginButton').trigger('click');
+            $('.submit:visible').trigger('click');
         }
     });
 
@@ -22,7 +22,7 @@ $(function() {
      */
     $('#loginPassword').on('keypress', function(evt) {
         if (evt.which == 13 && !evt.shiftKey) {
-            $('#loginButton').trigger('click');
+            $('.submit:visible').trigger('click');
         }
     });
 
@@ -50,4 +50,48 @@ $(function() {
             $("#loginError").text("Error logging in.");
         });
     });
+
+    $('#forgotPassword').click(function() {
+        /* If the username is already entered we can just submit. */
+        if ($("#loginUsername").val()) {
+            $("#resetButton").click();
+        } else {
+            /* Hide loginItems and show resetItems. */
+            $(".loginItem").hide();
+            $(".resetItem").show();
+        }
+    });
+
+    $('#resetButton').click(function() {
+        /* Submit password reset request. */
+        $(this).prop("disabled", true);
+        $.ajax({
+            "url": backendIpAddress + "password/reset",
+            "data": JSON.stringify({
+                "username": $('#loginUsername').val(),
+            }),
+            "type": "POST",
+        }).done(function(json) {
+            json = json || {};
+            if ("errors" in json && json.errors.length) {
+                // TODO: Integrate with error system.
+                $("#loginError").text("Error requesting password.");
+            } else {
+                $("<span>").addClass("success")
+                .text("Password reset request successful, check your email!")
+                .appendTo("#loginError");
+                revertToLogin();
+            }
+        }).fail(function() {
+            // Show error message
+            revertToLogin();
+            $("#loginError").text("Error requesting password.");
+        });
+    });
 });
+
+function revertToLogin() {
+    $(".resetItem").hide();
+    $(".loginItem").show();
+    $("#resetButton").prop("disabled", true);
+}
