@@ -17,7 +17,7 @@ $(function() {
         }
     });
 
-    $("#loginButton").click(function() {
+    $("#resetButton").click(function() {
         /* This function handles submitting the change request */
 
         /* Split split up query arguments */
@@ -52,7 +52,7 @@ $(function() {
             "type": "POST",
         }).done(function(json) {
             localStorage.accessToken = json.token;
-            window.location.href = "login.html";
+            window.location.href = "index.html";
         }).fail(function() {
             // Show error message
             $("#resetError").text("Error logging in.");
