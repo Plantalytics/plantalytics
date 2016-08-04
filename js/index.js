@@ -42,12 +42,24 @@ $(function() {
                 localStorage.accessToken = json.auth_token;
                 window.location.href = "dashboard.html";
             } else {
-                // Show error message.
-                $("#loginError").text("Error logging in.");
+              var responseObject = JSON.parse(json.responseText);
+              if (responseObject && responseObject.errors) {
+                var errors = responseObject.errors;
+                for (var errorCode in errors) {
+                $("#loginError").text(errors[errorCode]);
+                }
+              } else {
+                $("loginError").text("An unknown error occured. Please try again.");
             }
-        }).fail(function() {
-            // Show error message
-            $("#loginError").text("Error logging in.");
+        }).fail(function(json) {
+            var responseObject = JSON.parse(json.responseText);
+            if (responseObject && responseObject.errors) {
+              var errors = responseObject.errors;
+              for (var errorCode in errors) {
+                $("#loginError").text(errors[errorCode]);
+              }
+            } else {
+                $("loginError").text("An unknown error occured. Please try again.");
         });
     });
 });
