@@ -82,52 +82,115 @@ $(function() {
 
     // Listener for "Change Password" button.
     $("#menu-change-password").click(function() {
-        // TODO: Close menu button
+        // Close menu button
+        $("#menu").click();
 
-        // Prompt user for current password.
-        var oldPassword = prompt("Enter current password:", "");
+        // Listener for 'enter' keypress on password fields.
+        $('#current-password, #new-password').keypress(function(evt) {
+            if (evt.which == 13 && !evt.shiftKey) {
+                $('#change-password-button').trigger('click');
+            }
+        });
 
-        /**
-         * Prompt user for a new password.
-         * Make sure that the user didn't cancel the previous dialog before proceeding.
-         */
-        var newPassword = null;
-        if (oldPassword != null) {
-            var newPassword = prompt("Enter new password:", "");
-        }
-
-        // Make sure the user didn't hit cancel on either prompt.
-        if (oldPassword != null &&
-                newPassword != null) {
-            // Call change password endpoint with entered data.
-            $.ajax({
-                "url": backendIpAddress + "password/change",
-                "data": JSON.stringify({
-                  "old": oldPassword,
-                  "password": newPassword,
-                  "auth_token": localStorage.accessToken
-                }),
-                "type": "POST",
-            }).done(function(json) {
-                // Let user know of success!
-                alert("Password changed successfully!");
-            }).fail(function(json) {
-                // Show error if returned
-                // Parse response
-                var responseObject = JSON.parse(json.responseText);
-                if (responseObject &&
-                        responseObject.errors) {
-                    var errors = responseObject.errors;
-                    for (var errorCode in errors) {
-                        // Show first error
-                        alert(errors[errorCode]);
-                    }
-                } else {
-                    // Show generic error
-                    alert("An unknown error occurred. Please logout and log back in, then try again.");
+        // Set up click listener for password button
+        $("#change-password-button").click(function() {
+            // Set up result dialog
+            $("#dialog-change-password-result").dialog({
+                "autoOpen": false,
+                "show": {
+                  "effect": "scale",
+                  "duration": 400
+                },
+                "hide": {
+                  "effect": "scale",
+                  "duration": 400
                 }
             });
-        }
+
+            // Get old and new password.
+            var oldPassword = $("#current-password").val();
+            var newPassword = $("#new-password").val();
+
+            // Make sure the user didn't hit cancel on either prompt.
+            if (oldPassword != null &&
+                    newPassword != null) {
+                // Disable change password button while making ajax call
+                $("#change-password-button").prop("disabled", true);
+
+                // Call change password endpoint with entered data.
+                $.ajax({
+                    "url": backendIpAddress + "password/change",
+                    "data": JSON.stringify({
+                      "old": oldPassword,
+                      "password": newPassword,
+                      "auth_token": localStorage.accessToken
+                    }),
+                    "type": "POST",
+                }).done(function(json) {
+                    // Enable change password button while making ajax call
+                    $("#change-password-button").prop("disabled", false);
+
+                    // Clear fields
+                    $("#current-password").val("");
+                    $("#new-password").val("");
+
+                    // Close dialog
+                    $("#dialog-change-password").dialog("close");
+
+                    // Let user know of success!
+                    $("#change-password-result").val("Password changed successfully!");
+                    $("#dialog-change-password-result").dialog("open");
+                }).fail(function(json) {
+                    // Enable change password button while making ajax call
+                    $("#change-password-button").prop("disabled", false);
+
+                    // Clear fields
+                    $("#current-password").val("");
+                    $("#new-password").val("");
+
+                    // Show error if returned
+                    var errorToDisplay;
+
+                    // Parse response
+                    var responseObject = JSON.parse(json.responseText);
+                    if (responseObject &&
+                            responseObject.errors) {
+                        var errors = responseObject.errors;
+                        for (var errorCode in errors) {
+                            // Save to variable
+                            errorToDisplay = errors[errorCode];
+
+                            // Only save first error
+                            break;
+                        }
+                    } else {
+                        // Show generic error
+                        alert("An unknown error occurred. Please logout and log back in, then try again.");
+                    }
+
+                    // Make sure we have an error to display
+                    if (errorToDisplay) {
+                        // Set error text
+                        $("#change-password-result-text").val(errorToDisplay);
+                    }
+
+                    // Show dialog
+                    $("#dialog-change-password-result").dialog("open");
+                });
+            }
+        });
+
+        // Show change password dialog
+        $("#dialog-change-password").dialog({
+          "show": {
+            "effect": "scale",
+            "duration": 400
+          },
+          "hide": {
+            "effect": "scale",
+            "duration": 400
+          }
+        });
     });
 });
 
