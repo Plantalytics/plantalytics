@@ -86,13 +86,13 @@ $(function() {
         $("#menu").click();
 
         // Listener for 'enter' keypress on password fields.
-        $('#current-password, #new-password').keypress(function(evt) {
+        $('#current-password, #new-password, #new-password-confirm').keypress(function(evt) {
             if (evt.which == 13 && !evt.shiftKey) {
                 $('#change-password-button').trigger('click');
             }
         });
 
-        // Set up click listener for password button
+        // Set up click listener for change password button
         $("#change-password-button").click(function() {
             // Set up result dialog
             $("#dialog-change-password-result").dialog({
@@ -110,10 +110,12 @@ $(function() {
             // Get old and new password.
             var oldPassword = $("#current-password").val();
             var newPassword = $("#new-password").val();
+            var newPasswordConfirm = $("#new-password-confirm").val();
 
-            // Make sure the user didn't hit cancel on either prompt.
+            // Make sure the user filled out all information.
             if (oldPassword != null &&
-                    newPassword != null) {
+                    newPassword != null &&
+                    newPasswordConfirm != null) {
                 // Disable change password button while making ajax call
                 $("#change-password-button").prop("disabled", true);
 
@@ -133,20 +135,17 @@ $(function() {
                     // Clear fields
                     $("#current-password").val("");
                     $("#new-password").val("");
+                    $("#new-password-confirm").val("");
 
                     // Close dialog
                     $("#dialog-change-password").dialog("close");
 
                     // Let user know of success!
-                    $("#change-password-result").val("Password changed successfully!");
+                    $("#change-password-result-text").text("Password changed successfully!");
                     $("#dialog-change-password-result").dialog("open");
                 }).fail(function(json) {
                     // Enable change password button while making ajax call
                     $("#change-password-button").prop("disabled", false);
-
-                    // Clear fields
-                    $("#current-password").val("");
-                    $("#new-password").val("");
 
                     // Show error if returned
                     var errorToDisplay;
@@ -171,7 +170,7 @@ $(function() {
                     // Make sure we have an error to display
                     if (errorToDisplay) {
                         // Set error text
-                        $("#change-password-result-text").val(errorToDisplay);
+                        $("#change-password-result-text").text(errorToDisplay);
                     }
 
                     // Show dialog
