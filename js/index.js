@@ -9,32 +9,21 @@
 
 $(function() {
     /*
-     * Listener for 'enter' keypress on #loginUsername field.
+     * Listener for 'enter' keypress on #login* field.
      */
-    $('#loginUsername').on('keypress', function(evt) {
+    $("#loginUsername, #loginPassword").keypress(function(evt) {
         if (evt.which == 13 && !evt.shiftKey) {
-            $('#loginButton').trigger('click');
+            $("#loginButton").trigger("click");
         }
     });
 
-    /*
-     * Listener for 'enter' keypress on #loginPassword field.
-     */
-    $('#loginPassword').on('keypress', function(evt) {
-        if (evt.which == 13 && !evt.shiftKey) {
-            $('#loginButton').trigger('click');
-        }
-    });
-
-    $('#loginButton').click(function() {
-        /* This function to handle user login
-         * once backend support allows
-         */
+    $("#loginButton").click(function() {
+        /* This function handles user login */
         $.ajax({
             "url": backendIpAddress + "login",
             "data": JSON.stringify({
-                "username": $('#loginUsername').val(),
-                "password": $('#loginPassword').val()
+                "username": $("#loginUsername").val(),
+                "password": $("#loginPassword").val()
             }),
             "type": "POST"
         }).done(function(json) {
