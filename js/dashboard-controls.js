@@ -112,6 +112,13 @@ $(function() {
             var newPassword = $("#new-password").val();
             var newPasswordConfirm = $("#new-password-confirm").val();
 
+            // Make sure that confirm is same as new password
+            if (newPassword != newPasswordConfirm) {
+                // Show error and bail
+                showPasswordChangeResult("New passwords don't match.", false);
+                return;
+            }
+
             // Make sure the user filled out all information.
             if (oldPassword != null &&
                     newPassword != null &&
@@ -137,12 +144,8 @@ $(function() {
                     $("#new-password").val("");
                     $("#new-password-confirm").val("");
 
-                    // Close dialog
-                    $("#dialog-change-password").dialog("close");
-
-                    // Let user know of success!
-                    $("#change-password-result-text").text("Password changed successfully!");
-                    $("#dialog-change-password-result").dialog("open");
+                    // Show result
+                    showPasswordChangeResult("Password changed successfully!", true);
                 }).fail(function(json) {
                     // Enable change password button while making ajax call
                     $("#change-password-button").prop("disabled", false);
@@ -163,18 +166,12 @@ $(function() {
                             break;
                         }
                     } else {
-                        // Show generic error
-                        alert("An unknown error occurred. Please logout and log back in, then try again.");
+                        // Show generic error and close dialog
+                        showPasswordChangeResult("An unknown error occurred. Please logout and log back in, then try again.", true);
                     }
 
-                    // Make sure we have an error to display
-                    if (errorToDisplay) {
-                        // Set error text
-                        $("#change-password-result-text").text(errorToDisplay);
-                    }
-
-                    // Show dialog
-                    $("#dialog-change-password-result").dialog("open");
+                    // Show error without closing dialog
+                    showPasswordChangeResult(errorToDisplay, false);
                 });
             }
         });
@@ -192,6 +189,17 @@ $(function() {
         });
     });
 });
+
+function showPasswordChangeResult(resultText, shouldClose) {
+    // Close dialog if requested
+    if (shouldClose) {
+        $("#dialog-change-password").dialog("close");
+    }
+
+    // Show result text and open result dialog
+    $("#change-password-result-text").text(resultText);
+    $("#dialog-change-password-result").dialog("open");
+}
 
 function makeGetEnvData(env_variable) {
     return function () {
