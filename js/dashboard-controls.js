@@ -79,7 +79,136 @@ $(function() {
         // Redirect to login page
         window.location = "index.html";
     });
+
+    // Listener for "Change Password" button.
+    $("#menu-change-password").click(function() {
+        // Close menu button
+        $("#menu").click();
+
+        // Show change password dialog
+        $("#dialog-change-password").dialog({
+          "show": {
+            "effect": "scale",
+            "duration": 400
+          },
+          "hide": {
+            "effect": "scale",
+            "duration": 400
+          },
+          "close": function() {
+              // Clear fields
+              clearChangePasswordFields();
+          }
+        });
+    });
+
+    // Listener for 'enter' keypress on password fields.
+    $('#current-password, #new-password, #new-password-confirm').keypress(function(evt) {
+        if (evt.which == 13 && !evt.shiftKey) {
+            $('#change-password-button').trigger('click');
+        }
+    });
+
+    // Set up result dialog
+    $("#dialog-change-password-result").dialog({
+        "autoOpen": false,
+        "show": {
+          "effect": "scale",
+          "duration": 400
+        },
+        "hide": {
+          "effect": "scale",
+          "duration": 400
+        }
+    });
+
+    // Set up click listener for change password button
+    $("#change-password-button").click(function() {
+        // Get old and new password.
+        var oldPassword = $("#current-password").val();
+        var newPassword = $("#new-password").val();
+        var newPasswordConfirm = $("#new-password-confirm").val();
+
+        // Make sure that confirm is same as new password
+        if (newPassword != newPasswordConfirm) {
+            // Show error and bail
+            showPasswordChangeResult("New passwords don't match.", false);
+            return;
+        }
+
+        // Make sure the user filled out all information.
+        if (oldPassword != null &&
+                newPassword != null &&
+                newPasswordConfirm != null) {
+            // Disable change password button while making ajax call
+            $("#change-password-button").prop("disabled", true);
+
+            // Call change password endpoint with entered data.
+            $.ajax({
+                "url": backendIpAddress + "password/change",
+                "data": JSON.stringify({
+                  "old": oldPassword,
+                  "password": newPassword,
+                  "auth_token": localStorage.accessToken
+                }),
+                "type": "POST",
+            }).done(function(json) {
+                // Enable change password button while making ajax call
+                $("#change-password-button").prop("disabled", false);
+
+                // Clear fields
+                clearChangePasswordFields();
+
+                // Show result
+                showPasswordChangeResult("Password changed successfully!", true);
+            }).fail(function(json) {
+                // Enable change password button while making ajax call
+                $("#change-password-button").prop("disabled", false);
+
+                // Show error if returned
+                var errorToDisplay;
+
+                // Parse response
+                var responseObject = JSON.parse(json.responseText);
+                if (responseObject &&
+                        responseObject.errors) {
+                    var errors = responseObject.errors;
+                    for (var errorCode in errors) {
+                        // Save to variable
+                        errorToDisplay = errors[errorCode];
+
+                        // Only save first error
+                        break;
+                    }
+                } else {
+                    // Show generic error and close dialog
+                    showPasswordChangeResult("An unknown error occurred. Please logout and log back in, then try again.", true);
+                }
+
+                // Show error without closing dialog
+                showPasswordChangeResult(errorToDisplay, false);
+            });
+        }
+    });
 });
+
+function clearChangePasswordFields() {
+    // Clear all fields
+    $("#current-password").val("");
+    $("#new-password").val("");
+    $("#new-password-confirm").val("");
+}
+
+function showPasswordChangeResult(resultText, shouldClose) {
+    // Close dialog if requested
+    if (shouldClose) {
+        $("#dialog-change-password").dialog("close");
+    }
+
+    // Show result text and open result dialog
+    $("#change-password-result-text").text(resultText);
+    $("#dialog-change-password-result").dialog("open");
+}
 
 function makeGetEnvData(env_variable) {
     return function () {
