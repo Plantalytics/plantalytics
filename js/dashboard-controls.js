@@ -94,6 +94,10 @@ $(function() {
           "hide": {
             "effect": "scale",
             "duration": 400
+          },
+          "close": function() {
+              // Clear fields
+              clearChangePasswordFields();
           }
         });
     });
@@ -105,21 +109,21 @@ $(function() {
         }
     });
 
+    // Set up result dialog
+    $("#dialog-change-password-result").dialog({
+        "autoOpen": false,
+        "show": {
+          "effect": "scale",
+          "duration": 400
+        },
+        "hide": {
+          "effect": "scale",
+          "duration": 400
+        }
+    });
+
     // Set up click listener for change password button
     $("#change-password-button").click(function() {
-        // Set up result dialog
-        $("#dialog-change-password-result").dialog({
-            "autoOpen": false,
-            "show": {
-              "effect": "scale",
-              "duration": 400
-            },
-            "hide": {
-              "effect": "scale",
-              "duration": 400
-            }
-        });
-
         // Get old and new password.
         var oldPassword = $("#current-password").val();
         var newPassword = $("#new-password").val();
@@ -153,9 +157,7 @@ $(function() {
                 $("#change-password-button").prop("disabled", false);
 
                 // Clear fields
-                $("#current-password").val("");
-                $("#new-password").val("");
-                $("#new-password-confirm").val("");
+                clearChangePasswordFields();
 
                 // Show result
                 showPasswordChangeResult("Password changed successfully!", true);
@@ -189,6 +191,13 @@ $(function() {
         }
     });
 });
+
+function clearChangePasswordFields() {
+    // Clear all fields
+    $("#current-password").val("");
+    $("#new-password").val("");
+    $("#new-password-confirm").val("");
+}
 
 function showPasswordChangeResult(resultText, shouldClose) {
     // Close dialog if requested
