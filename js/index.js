@@ -57,6 +57,7 @@ $(function() {
             $("#resetButton").click();
         } else {
             /* Hide loginItems and show resetItems. */
+            $("#resetError").text("");
             $(".loginItem").hide();
             $(".resetItem").show();
         }
