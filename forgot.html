@@ -13,13 +13,13 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>Plantalytics Login</title>
+        <title>Plantalytics Password Change</title>
 
         <!-- Includes -->
         <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
         <link rel="stylesheet" href="css/index.css"/>
-        <script type="text/javascript" src="js/index.js"></script>
+        <script type="text/javascript" src="js/forgot.js"></script>
         <script type="text/javascript" src="js/config.js"></script>
 
         <!-- Favicon Links -->
@@ -32,28 +32,21 @@
         <div class="container">
             <img src="images/logo.png" id="logo" alt="Plantalytics Precision Agriculture logo">
             <p class="centerBlock">
-                <strong class="loginItem">Plantalytics User Login</strong>
-                <strong class="resetItem">Plantalytics Password Recovery</strong>
+                <strong>Change your password for Plantalytics</strong>
                 <br>
-                <strong class="error" id="loginError"></strong>
+                <strong class="error" id="resetError"></strong>
             </p>
             <p class="centerBlock">
-                <label for="loginUsername">Username </label>
-                <input class="textBox" type="text" id="loginUsername" />
-            </p>
-            <p class="centerBlock loginItem">
-                <label for="loginPassword">Password </label>
-                <a href="#" tabindex="-1" title="Forgot your password?" id="forgotPassword">?</a>
-                <input class="textBox" type="password" id="loginPassword" />
+                <label for="resetNewPassword">New password </label>
+                <input class="textBox" type="password" id="resetNewPassword" />
             </p>
             <p class="centerBlock">
-                <input id="loginButton" class="button loginItem submit" type="button" value="Login" />
-                <input id="resetButton" class="button resetItem submit" type="button" value="Request password reset" />
+                <label for="resetConfirmPassword">Confirm password </label>
+                <input class="textBox" type="password" id="resetConfirmPassword" />
+            </p>
+            <p class="centerBlock">
+                <input id="resetButton" class="button" type="button" value="Change Password" />
                 <br>
-            </p>
-            <p class="centerBlock">
-                <!-- Will connect with account singup page once implemented -->
-                <a href="#">Get Plantalytics</a>
             </p>
         </div>
     </body>

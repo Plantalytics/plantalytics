@@ -64,6 +64,10 @@ strong.error {
     color: red;
 }
 
+.success {
+    color: green;
+}
+
 /* Link style */
 a:link {
     color: olivedrab;
@@ -121,4 +125,8 @@ input.button {
 input.button:active {
     border: darkolivegreen solid 2px;
     background: dimgray;
+}
+
+.resetItem {
+    display: none;
 }
