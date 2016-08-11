@@ -13,7 +13,7 @@ $(function() {
      */
     $("#loginUsername, #loginPassword").keypress(function(evt) {
         if (evt.which == 13 && !evt.shiftKey) {
-            $("#loginButton").trigger("click");
+            $('.submit:visible').trigger('click');
         }
     });
 
@@ -67,9 +67,10 @@ $(function() {
                 // TODO: Integrate with error system.
                 $("#loginError").text("Error requesting password.");
             } else {
-                $("<span>").addClass("success")
-                .text("Password reset request successful, check your email!")
-                .appendTo("#loginError");
+                $("#loginError").empty().append(
+                    $("<span>").addClass("success")
+                    .text("Password reset request successful, check your email!")
+                );
                 revertToLogin();
             }
         }).fail(function() {
