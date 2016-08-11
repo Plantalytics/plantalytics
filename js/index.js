@@ -27,8 +27,10 @@ $(function() {
             }),
             "type": "POST"
         }).done(function(json) {
-            if (json.auth_token) {
+            if (json.auth_token &&
+                    json.vineyard_ids) {
                 localStorage.accessToken = json.auth_token;
+                localStorage.vineyardIds = JSON.stringify(json.vineyard_ids);
                 window.location.href = "dashboard.html";
             } else {
                 // Show error message.
