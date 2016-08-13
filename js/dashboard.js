@@ -12,40 +12,26 @@ $.getScript('http://www.mapquestapi.com/sdk/leaflet/v2.2/mq-map.js?key=' + mapQu
 /////////////////////////////////// On Load ///////////////////////////////////
 
 $(function() {
-    // Get information for our current user.
-    // TODO: $.ajax({...})
-
     // Make sure the user has a login token before continuing.
     if (!localStorage.accessToken) {
       window.location = "index.html";
     }
 
-    ({
-        "url": "",
-        "dataType": "json",
-        "done": function (data) {
-            if (mapsReady) {
-                createMap(data);
-            } else {
-                delayMapCreation(data);
-            }
+    // Perform call to vineyard endpoint
+    $.ajax({
+        "url": backendIpAddress + "vineyard",
+        "data": JSON.stringify({
+            "auth_token": localStorage.accessToken,
+            // TODO: Don't hardcode
+            "vineyard_id": 1
+        }),
+        "type": "POST"
+    }).done(function(data) {
+        if (mapsReady) {
+            createMap(data);
+        } else {
+            delayMapCreation(data);
         }
-    }).done({
-        // Vineyard center [lat, lon]
-        "center": {
-            "lat": 45.33821,
-            "lng": -123.0487
-        },
-        // Boundary coords [lat, lon], ...
-        // Must be listed in drawing order
-        'propertyBoundary': [
-            [45.3386, -123.04894],
-            [45.3386, -123.04833],
-            [45.33781, -123.04834],
-            [45.33781, -123.04899],
-            [45.33801, -123.04921],
-            [45.3382, -123.0492]
-        ]
     });
 });
 
@@ -56,8 +42,8 @@ function createMap(data) {
     // Calculate map bounds
     var latOffset = .00145; // Perhaps calculate these offsets based
     var lngOffset = .00525; //   on the surface area of the vineyard.
-    var southWest = {'lat': data.center.lat - latOffset, 'lng': data.center.lng - lngOffset};
-    var northEast = {'lat': data.center.lat + latOffset, 'lng': data.center.lng + lngOffset};
+    var southWest = {'lat': data.center.lat - latOffset, 'lng': data.center.lon - lngOffset};
+    var northEast = {'lat': data.center.lat + latOffset, 'lng': data.center.lon + lngOffset};
 
     // Initialize map
     mapsData = data;
@@ -76,7 +62,7 @@ function createMap(data) {
     map.addControl(zoom);
 
     ////////////////////// Set Property Boundary Vertices //////////////////////
-    var propertyBoundary = L.polygon(data.propertyBoundary, {
+    var propertyBoundary = L.polygon(data.boundary, {
         fillOpacity: 0
     }).addTo(map);
 
