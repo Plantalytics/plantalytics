@@ -72,13 +72,14 @@ $(function() {
 
     $('#humidity-button').click(makeGetEnvData("humidity"));
 
-    $("#menu-logout").click(function() {
-        // Delete access token from local storage.
-        delete localStorage.accessToken;
+    $('#menu-change-vineyard-dropdown').change(function() {
+        // Update selected vineyard
+        var selectedVineyard = $('#menu-change-vineyard-dropdown').find(':selected').val();
+        localStorage.selectedVineyard = selectedVineyard;
 
-        // Redirect to login page
-        window.location = "index.html";
-    });
+        // TODO: Don't reload page?
+        location.reload(true);
+    })
 
     // Listener for "Change Password" button.
     $("#menu-change-password").click(function() {
@@ -190,6 +191,18 @@ $(function() {
             });
         }
     });
+
+    $("#menu-logout").click(function() {
+        // Delete access token from local storage.
+        delete localStorage.accessToken;
+
+        // Delete authorized vineyards and selected vineyard
+        delete localStorage.authorizedVineyards;
+        delete localStorage.selectedVineyard;
+
+        // Redirect to login page
+        window.location = "index.html";
+    });
 });
 
 function clearChangePasswordFields() {
@@ -215,7 +228,7 @@ function makeGetEnvData(env_variable) {
         $.ajax({
             "url": backendIpAddress + "env_data",
             "data": JSON.stringify({
-              "vineyard_id": 1,
+              "vineyard_id": localStorage.selectedVineyard,
               "env_variable": env_variable,
               "auth_token": localStorage.accessToken
             }),

@@ -17,13 +17,15 @@ $(function() {
       window.location = "index.html";
     }
 
+    // Set up vineyard selection dropdown
+    setUpVineyardSelectionDropdown();
+
     // Perform call to vineyard endpoint
     $.ajax({
         "url": backendIpAddress + "vineyard",
         "data": JSON.stringify({
             "auth_token": localStorage.accessToken,
-            // TODO: Don't hardcode
-            "vineyard_id": 1
+            "vineyard_id": localStorage.selectedVineyard
         }),
         "type": "POST"
     }).done(function(data) {
@@ -86,6 +88,22 @@ function readyMap() {
 
 function delayMapCreation(data) {
     mapsData = data;
+}
+
+function setUpVineyardSelectionDropdown() {
+    // Grab instance of dropdown
+    var changeVineyardDropdown = $('#menu-change-vineyard-dropdown')
+
+    var authorizedVineyards = JSON.parse(localStorage.authorizedVineyards);
+    authorizedVineyards.forEach(function(vineyardObject) {
+        // Set up options object for dropdown.
+        changeVineyardDropdown.append($("<option />")
+            .val(vineyardObject.vineyard_id)
+            .text(vineyardObject.vineyard_name));
+    });
+
+    // Select correct item
+    changeVineyardDropdown.val(localStorage.selectedVineyard);
 }
 
 // Re-centers the map on double-click
