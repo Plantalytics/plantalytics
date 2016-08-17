@@ -31,23 +31,35 @@ $(function() {
          * once backend support allows
          */
         $.ajax({
-            url: backendIpAddress + 'login', 
-            "data": {
+            "url": backendIpAddress + "login",
+            "data": JSON.stringify({
                 "username": $('#loginUsername').val(),
-                "password": $('#loginPassword').val(),
-            },
-            type: "GET"
+                "password": $('#loginPassword').val()
+            }),
+            "type": "POST"
         }).done(function(json) {
-            if (json.token) {
-                localStorage.accessToken = json.token;
+            if (json.auth_token) {
+                localStorage.accessToken = json.auth_token;
                 window.location.href = "dashboard.html";
             } else {
-                // Show error message.
-                $("#loginError").text("Error logging in.");
+              var responseObject = JSON.parse(json.responseText);
+              if (responseObject && responseObject.errors) {
+                var errors = responseObject.errors;
+                for (var errorCode in errors) {
+                $("#loginError").text(errors[errorCode]);
+                }
+              } else {
+                $("loginError").text("An unknown error occured. Please try again.");
             }
-        }).fail(function() {
-            // Show error message
-            $("#loginError").text("Error logging in.");
+        }).fail(function(json) {
+            var responseObject = JSON.parse(json.responseText);
+            if (responseObject && responseObject.errors) {
+              var errors = responseObject.errors;
+              for (var errorCode in errors) {
+                $("#loginError").text(errors[errorCode]);
+              }
+            } else {
+                $("loginError").text("An unknown error occured. Please try again.");
         });
     });
 });

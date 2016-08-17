@@ -85,22 +85,39 @@ function makeGetEnvData(env_variable) {
     return function () {
         $.ajax({
             "url": backendIpAddress + "env_data",
-            "data": {
+            "data": JSON.stringify({
               "vineyard_id": 1,
               "env_variable": env_variable,
-            },
+              "auth_token": localStorage.accessToken
+            }),
             "dataType": "json",
-            "type": "GET",
+            "type": "POST",
         }).done(function(json) {
             if (json.env_data) {
                 var envData = parseEnvData(json.env_data, env_variable);
                 map.removeLayer(idw);
                 idw = L.idwLayer(envData, idwOptions).addTo(map);
             } else {
-                /* TODO: add error handing message*/
+                var responseObject = JSON.parse(json.responseText);
+                if (responseObject && responseObject.errors) {
+                    var errors = responseObject.errors;
+                    for (var errorCode in errors) {
+                        alert(errors[errorCode]);
+                    }
+                } else {
+                     alert("An unknown error occured. Please try again.");
+                }
             }
-        }).fail(function() {
-            /* TODO: add error handing message*/
+        }).fail(function(json) {
+            var responseObject = JSON.parse(json.responseText);
+            if (responseObject && responseObject.errors) {
+                var errors = responseObject.errors;
+                for (var errorCode in errors) {
+                    alert(errors[errorCode]);
+                }
+           } else {
+                alert("An unknown error occured. Please try again.");
+           }
         });
     }
 }
