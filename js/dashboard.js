@@ -9,6 +9,9 @@
 
 $.getScript('http://www.mapquestapi.com/sdk/leaflet/v2.2/mq-map.js?key=' + mapQuestKey, readyMap);
 
+// Used for storing the list of selectable vineyards
+var selectableVineyardsList = [];
+
 /////////////////////////////////// On Load ///////////////////////////////////
 
 $(function() {
@@ -91,19 +94,55 @@ function delayMapCreation(data) {
 }
 
 function setUpVineyardSelectionDropdown() {
-    // Grab instance of dropdown
-    var changeVineyardDropdown = $('#menu-change-vineyard-dropdown')
+    // Grab instance of header
+    var changeVineyardHeader = $('#menu-change-vineyard-header');
 
     var authorizedVineyards = JSON.parse(localStorage.authorizedVineyards);
     authorizedVineyards.forEach(function(vineyardObject) {
-        // Set up options object for dropdown.
-        changeVineyardDropdown.append($("<option />")
+        // Create menu entry
+        var currentVineyardEntry = $("<div />")
+            .addClass("menu-entry")
             .val(vineyardObject.vineyard_id)
-            .text(vineyardObject.vineyard_name));
+            .text(vineyardObject.vineyard_name)
+            .click(function(event) {
+                updateSelectedVineyard(event.target.value);
+            })
+
+        // Set initial vineyard selection.
+        if (currentVineyardEntry.val() == localStorage.selectedVineyard) {
+            currentVineyardEntry.removeClass("menu-entry").addClass("menu-entry-selected");
+        }
+
+        // Add vineyards below header.
+        changeVineyardHeader.after(currentVineyardEntry);
+
+        // Add to selectable vineyards list for later query.
+        selectableVineyardsList.push(currentVineyardEntry);
+    });
+}
+
+function updateSelectedVineyard(selectedVineyardId) {
+    console.log("Selected vineyard id is: " + selectedVineyardId);
+    // Iterate through vineyards and deselect old, if applicable
+    selectableVineyardsList.forEach(function (currentVineyardEntry) {
+        // Deselect selected vineyard
+        if (currentVineyardEntry.val() == localStorage.selectedVineyard) {
+            // Unselect the entry
+            currentVineyardEntry.removeClass("menu-entry-selected").addClass("menu-entry");
+        }
+
+        // Select new vineyard
+        if (currentVineyardEntry.val() == selectedVineyardId) {
+            // Select the entry
+            currentVineyardEntry.removeClass("menu-entry").addClass("menu-entry-selected");
+        }
     });
 
-    // Select correct item
-    changeVineyardDropdown.val(localStorage.selectedVineyard);
+    // Update selected vineyard
+    localStorage.selectedVineyard = selectedVineyardId;
+
+    // TODO: Don't reload page?
+    location.reload(true);
 }
 
 // Re-centers the map on double-click

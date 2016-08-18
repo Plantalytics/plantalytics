@@ -72,15 +72,6 @@ $(function() {
 
     $('#humidity-button').click(makeGetEnvData("humidity"));
 
-    $('#menu-change-vineyard-dropdown').change(function() {
-        // Update selected vineyard
-        var selectedVineyard = $('#menu-change-vineyard-dropdown').find(':selected').val();
-        localStorage.selectedVineyard = selectedVineyard;
-
-        // TODO: Don't reload page?
-        location.reload(true);
-    })
-
     // Listener for "Change Password" button.
     $("#menu-change-password").click(function() {
         // Close menu button
