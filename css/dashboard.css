@@ -146,7 +146,11 @@ html, body, #map {
     padding-bottom: 5px;
 }
 
-.menu-entry, .menu-entry-unselectable {
+.menu-entry-selected {
+    background-color: lightgray;
+}
+
+.menu-entry, .menu-entry-unselectable, .menu-entry-selected {
     padding: 3px 13px;
 }
 

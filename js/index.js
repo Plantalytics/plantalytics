@@ -27,8 +27,14 @@ $(function() {
             }),
             "type": "POST"
         }).done(function(json) {
-            if (json.auth_token) {
+            if (json.auth_token &&
+                    json.authorized_vineyards) {
                 localStorage.accessToken = json.auth_token;
+                localStorage.authorizedVineyards = JSON.stringify(json.authorized_vineyards);
+
+                // TODO: Don't have this be 0 by default?
+                localStorage.selectedVineyard = JSON.stringify(json.authorized_vineyards[0].vineyard_id);
+
                 window.location.href = "dashboard.html";
             } else {
                 // Show error message.

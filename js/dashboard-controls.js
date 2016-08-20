@@ -72,14 +72,6 @@ $(function() {
 
     $('#humidity-button').click(makeGetEnvData("humidity"));
 
-    $("#menu-logout").click(function() {
-        // Delete access token from local storage.
-        delete localStorage.accessToken;
-
-        // Redirect to login page
-        window.location = "index.html";
-    });
-
     // Listener for "Change Password" button.
     $("#menu-change-password").click(function() {
         // Close menu button
@@ -190,6 +182,18 @@ $(function() {
             });
         }
     });
+
+    $("#menu-logout").click(function() {
+        // Delete access token from local storage.
+        delete localStorage.accessToken;
+
+        // Delete authorized vineyards and selected vineyard
+        delete localStorage.authorizedVineyards;
+        delete localStorage.selectedVineyard;
+
+        // Redirect to login page
+        window.location = "index.html";
+    });
 });
 
 function clearChangePasswordFields() {
@@ -215,7 +219,7 @@ function makeGetEnvData(env_variable) {
         $.ajax({
             "url": backendIpAddress + "env_data",
             "data": JSON.stringify({
-              "vineyard_id": 1,
+              "vineyard_id": localStorage.selectedVineyard,
               "env_variable": env_variable,
               "auth_token": localStorage.accessToken
             }),
