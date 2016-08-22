@@ -36,7 +36,7 @@ $(function() {
                 "username": $('#loginUsername').val(),
                 "password": $('#loginPassword').val()
             }),
-            "type": "POST"
+            "type": "POST",
         }).done(function(json) {
             if (json.auth_token) {
                 localStorage.accessToken = json.auth_token;
@@ -50,16 +50,18 @@ $(function() {
                 }
               } else {
                 $("loginError").text("An unknown error occured. Please try again.");
+              }
             }
         }).fail(function(json) {
             var responseObject = JSON.parse(json.responseText);
             if (responseObject && responseObject.errors) {
               var errors = responseObject.errors;
-              for (var errorCode in errors) {
-                $("#loginError").text(errors[errorCode]);
-              }
+                for (var errorCode in errors) {
+                  $("#loginError").text(errors[errorCode]);
+                }
             } else {
                 $("loginError").text("An unknown error occured. Please try again.");
+            }
         });
     });
 });
