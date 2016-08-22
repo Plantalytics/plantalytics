@@ -25,7 +25,7 @@ $(function() {
                 "username": $("#loginUsername").val(),
                 "password": $("#loginPassword").val()
             }),
-            "type": "POST"
+            "type": "POST",
         }).done(function(json) {
             if (json.auth_token &&
                     json.authorized_vineyards) {
@@ -37,12 +37,26 @@ $(function() {
 
                 window.location.href = "dashboard.html";
             } else {
-                // Show error message.
-                $("#loginError").text("Error logging in.");
+              var responseObject = JSON.parse(json.responseText);
+              if (responseObject && responseObject.errors) {
+                var errors = responseObject.errors;
+                for (var errorCode in errors) {
+                $("#loginError").text(errors[errorCode]);
+                }
+              } else {
+                $("loginError").text("An unknown error occured. Please try again.");
+              }
             }
-        }).fail(function() {
-            // Show error message
-            $("#loginError").text("Error logging in.");
+        }).fail(function(json) {
+            var responseObject = JSON.parse(json.responseText);
+            if (responseObject && responseObject.errors) {
+              var errors = responseObject.errors;
+                for (var errorCode in errors) {
+                  $("#loginError").text(errors[errorCode]);
+                }
+            } else {
+                $("loginError").text("An unknown error occured. Please try again.");
+            }
         });
     });
 
