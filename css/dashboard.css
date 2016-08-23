@@ -40,6 +40,7 @@ html, body, #map {
 /* Button styles */
 .data-buttons {
     display: inline-block;
+    margin: auto;
 }
 
 .data-button-label > input {
@@ -108,7 +109,8 @@ html, body, #map {
     background-color: white;
     overflow: hidden;
 
-    font-size: 14pt;
+    font-family: "Open Sans", sans-serif;
+    font-size: 13pt;
     font-weight: bold;
 
     cursor: default;
@@ -143,7 +145,6 @@ html, body, #map {
 
 .menu-group:last-child {
     border-bottom: 0px solid transparent;
-    padding-bottom: 5px;
 }
 
 .menu-entry-selected {
@@ -151,10 +152,20 @@ html, body, #map {
 }
 
 .menu-entry, .menu-entry-unselectable, .menu-entry-selected {
-    padding: 3px 13px;
+    padding: 5px 10px;
+    white-space: nowrap;
 }
 
 .menu-entry:hover {
+    background-color: lightgray;
+}
+
+.menu-item, .menu-item-selected {
+    padding: 5px 20px;
+    font-weight: normal;
+}
+
+.menu-item-selected {
     background-color: lightgray;
 }
 
