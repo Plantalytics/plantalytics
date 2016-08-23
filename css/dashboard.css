@@ -40,7 +40,6 @@ html, body, #map {
 /* Button styles */
 .data-buttons {
     display: inline-block;
-    margin: auto;
 }
 
 .data-button-label > input {
