@@ -263,7 +263,7 @@ function parseEnvData(envData, envDataType) {
         envDataItem[1] = envData[i].longitude;
         switch (envDataType) {
           case "leafwetness":
-            envDataItem[2] = envData[i].leafwetness;
+            envDataItem[2] = envData[i].leafwetness/10;
             break;
           case "temperature":
             envDataItem[2] = envData[i].temperature;

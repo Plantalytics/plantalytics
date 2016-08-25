@@ -101,7 +101,7 @@ function setUpVineyardSelectionDropdown() {
     authorizedVineyards.forEach(function(vineyardObject) {
         // Create menu entry
         var currentVineyardEntry = $("<div />")
-            .addClass("menu-entry")
+            .addClass("menu-item")
             .val(vineyardObject.vineyard_id)
             .text(vineyardObject.vineyard_name)
             .click(function(event) {
@@ -110,7 +110,7 @@ function setUpVineyardSelectionDropdown() {
 
         // Set initial vineyard selection.
         if (currentVineyardEntry.val() == localStorage.selectedVineyard) {
-            currentVineyardEntry.removeClass("menu-entry").addClass("menu-entry-selected");
+            currentVineyardEntry.removeClass("menu-item").addClass("menu-item-selected");
         }
 
         // Add vineyards below header.
@@ -128,13 +128,13 @@ function updateSelectedVineyard(selectedVineyardId) {
         // Deselect selected vineyard
         if (currentVineyardEntry.val() == localStorage.selectedVineyard) {
             // Unselect the entry
-            currentVineyardEntry.removeClass("menu-entry-selected").addClass("menu-entry");
+            currentVineyardEntry.removeClass("menu-item-selected").addClass("menu-item");
         }
 
         // Select new vineyard
         if (currentVineyardEntry.val() == selectedVineyardId) {
             // Select the entry
-            currentVineyardEntry.removeClass("menu-entry").addClass("menu-entry-selected");
+            currentVineyardEntry.removeClass("menu-item").addClass("menu-item-selected");
         }
     });
 
