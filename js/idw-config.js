@@ -13,7 +13,7 @@ var idwOptions = {
   cellSize: 5,   // CellSize determines interpolation granularity
   exp: 3,        // Exponent used for weighting
   // Max varies based on condition/value
-  max: 66,       // Point value ceiling
+  max: 100,       // Point value ceiling
   gradient: {    // Gradient assignment red (hi) -> violet (lo)
     0.0: 'violet',
     0.1: 'blueviolet',

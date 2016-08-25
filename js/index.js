@@ -9,45 +9,100 @@
 
 $(function() {
     /*
-     * Listener for 'enter' keypress on #loginUsername field.
+     * Listener for 'enter' keypress on #login* field.
      */
-    $('#loginUsername').on('keypress', function(evt) {
+    $("#loginUsername, #loginPassword").keypress(function(evt) {
         if (evt.which == 13 && !evt.shiftKey) {
-            $('#loginButton').trigger('click');
+            $('.submit:visible').trigger('click');
         }
     });
 
-    /*
-     * Listener for 'enter' keypress on #loginPassword field.
-     */
-    $('#loginPassword').on('keypress', function(evt) {
-        if (evt.which == 13 && !evt.shiftKey) {
-            $('#loginButton').trigger('click');
-        }
-    });
-
-    $('#loginButton').click(function() {
-        /* This function to handle user login
-         * once backend support allows
-         */
+    $("#loginButton").click(function() {
+        /* This function handles user login */
         $.ajax({
-            url: backendIpAddress + 'login', 
-            "data": {
-                "username": $('#loginUsername').val(),
-                "password": $('#loginPassword').val(),
-            },
-            type: "GET"
+            "url": backendIpAddress + "login",
+            "data": JSON.stringify({
+                "username": $("#loginUsername").val(),
+                "password": $("#loginPassword").val()
+            }),
+            "type": "POST",
         }).done(function(json) {
-            if (json.token) {
-                localStorage.accessToken = json.token;
+            if (json.auth_token &&
+                    json.authorized_vineyards) {
+                localStorage.accessToken = json.auth_token;
+                localStorage.authorizedVineyards = JSON.stringify(json.authorized_vineyards);
+
+                // TODO: Don't have this be 0 by default?
+                localStorage.selectedVineyard = JSON.stringify(json.authorized_vineyards[0].vineyard_id);
+
                 window.location.href = "dashboard.html";
             } else {
-                // Show error message.
-                $("#loginError").text("Error logging in.");
+              var responseObject = JSON.parse(json.responseText);
+              if (responseObject && responseObject.errors) {
+                var errors = responseObject.errors;
+                for (var errorCode in errors) {
+                $("#loginError").text(errors[errorCode]);
+                }
+              } else {
+                $("loginError").text("An unknown error occured. Please try again.");
+              }
+            }
+        }).fail(function(json) {
+            var responseObject = JSON.parse(json.responseText);
+            if (responseObject && responseObject.errors) {
+              var errors = responseObject.errors;
+                for (var errorCode in errors) {
+                  $("#loginError").text(errors[errorCode]);
+                }
+            } else {
+                $("loginError").text("An unknown error occured. Please try again.");
+            }
+        });
+    });
+
+    $('#forgotPassword').click(function() {
+        /* If the username is already entered we can just submit. */
+        if ($("#loginUsername").val()) {
+            $("#resetButton").click();
+        } else {
+            /* Hide loginItems and show resetItems. */
+            $("#loginError").text("");
+            $(".loginItem").hide();
+            $(".resetItem").show();
+        }
+    });
+
+    $('#resetButton').click(function() {
+        /* Submit password reset request. */
+        $(this).prop("disabled", true);
+        $.ajax({
+            "url": backendIpAddress + "password/reset",
+            "data": JSON.stringify({
+                "username": $('#loginUsername').val(),
+            }),
+            "type": "POST",
+        }).done(function(json) {
+            json = json || {};
+            if ("errors" in json && json.errors.length) {
+                // TODO: Integrate with error system.
+                $("#loginError").text("Error requesting password.");
+            } else {
+                $("#loginError").empty().append(
+                    $("<span>").addClass("success")
+                    .text("Password reset request successful, check your email!")
+                );
+                revertToLogin();
             }
         }).fail(function() {
             // Show error message
-            $("#loginError").text("Error logging in.");
+            revertToLogin();
+            $("#loginError").text("Error requesting password.");
         });
     });
 });
+
+function revertToLogin() {
+    $(".resetItem").hide();
+    $(".loginItem").show();
+    $("#resetButton").prop("disabled", false);
+}

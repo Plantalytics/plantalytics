@@ -22,9 +22,14 @@
         <!-- jQuery -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 
+        <!-- jQuery-UI -->
+        <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css">
+        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
+
         <!-- Leaflet -->
-        <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
-        <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
+        <link rel="stylesheet" href="https://npmcdn.com/leaflet@0.7.7/dist/leaflet.css" />
+        <script src="https://npmcdn.com/leaflet@0.7.7/dist/leaflet.js"></script>
 
         <!--------------------------- Local Files --------------------------->
 
@@ -66,7 +71,7 @@
                 <div class="menu-button" id="menu" title="Menu"></div>
                 <div class="menu">
                     <div class="menu-group">
-                        <div class="menu-entry-unselectable centered">Default view</div>
+                        <div class="menu-entry-unselectable">Default View</div>
                         <div class="menu-entry-unselectable data-view-defaults">
                             <label class="data-button-label leaf-wetness">
                                 <input id="menu-leafwetness" type="radio" name="data-view-default" />
@@ -83,10 +88,34 @@
                         </div>
                     </div>
                     <div class="menu-group">
+                        <div id="menu-change-vineyard-header" class="menu-entry-unselectable">Vineyard</div>
+                    </div>
+                    <div class="menu-group">
+                        <div class="menu-entry" id="menu-change-password">Change Password</div>
+                    </div>
+                    <div class="menu-group">
                         <div class="menu-entry" id="menu-logout">Logout</div>
                     </div>
                 </div>
             </div>
+        </div>
+        <div id="dialog-change-password" title="Change Password" class="dialog">
+            <div>
+                <label for="current-password">Current Password</label>
+                <input type="password" name="current-password" id="current-password" class="text ui-widget-content ui-corner-all">
+            </div>
+            <div>
+                <label for="new-password">New Password</label>
+                <input type="password" name="new-password" id="new-password" class="text ui-widget-content ui-corner-all">
+            </div>
+            <div>
+                <label for="new-password-confirm">Confirm New Password</label>
+                <input type="password" name="new-password-confirm" id="new-password-confirm" class="text ui-widget-content ui-corner-all">
+            </div>
+            <button id="change-password-button">Change Password</button>
+        </div>
+        <div id="dialog-change-password-result" title="Change Password" class="dialog">
+            <p id="change-password-result-text">Password result goes here</p>
         </div>
     </body>
 </html>
