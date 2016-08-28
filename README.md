@@ -29,8 +29,8 @@ licensing details)
 
 ## Creating config.js
 
-After forking or cloning the repository, create `./js/config.js`. This file 
-should declare the following variables:
+After downloading the repository to your desired location, create 
+`./js/config.js`. This file should declare the following variables:
 
 * `var mapQuestKey = ` (string value for MapQuest API key)
 * `var backendIpAddress = ` (string value for the IP address to the 
