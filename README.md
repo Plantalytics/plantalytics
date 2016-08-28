@@ -1,6 +1,6 @@
 # Plantalytics Front End
 
-Plantalytics is a web app intended to help vintners monitor conditions of 
+Plantalytics is an IoT web app intended to help vintners monitor conditions of 
 their vineyards. The front end includes the HTML and JavaScript necessary to 
 interpret the values produced by the hardware, and stored in the back end.
 
@@ -17,6 +17,8 @@ on correct installation and configuration of the
 
 ## Third Party Dependencies
 
+* jQuery (CDN)
+    * https://jquery.com/
 * Leaflet (CDN)
     * http://leafletjs.com/
 * MapQuest Leaflet Plugins (CDN)
