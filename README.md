@@ -56,7 +56,7 @@ After downloading the repository to your desired location, create
     * Allows user to select between their vineyards (if more than one exists).
     * Allows user to reset password.
     
-For more detail, including API details, please see the 
+For more information, including API details, please see the 
 [documentation repository](https://github.com/Plantalytics/documentation).
 
 ## Contribution
